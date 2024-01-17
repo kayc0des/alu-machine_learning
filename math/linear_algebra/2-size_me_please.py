@@ -1,16 +1,26 @@
 #!/usr/bin/env python3
 def matrix_shape(matrix):
     """
-    Determine's the shape of a matrix
-    Parameters: matrix: The input matrix
+    Determines the shape of a matrix.
+
+    Parameters:
+    - matrix (list): The input matrix.
+
+    Returns:
+    - list: A list representing the shape of the matrix.
     """
     shape = []
     shape.append(len(matrix))
 
     def nested_shape(matrix):
         """
-        Recursively calculates the shape of nested lists
-        Parameters: matrix(list)
+        Recursively calculates the shape of nested lists.
+
+        Parameters:
+        - matrix (list): The input nested list.
+
+        Returns:
+        - set: A set containing unique lengths of sublists in the nested structure.
         """
         get_nested_shape = set()
         for sub_list in matrix:

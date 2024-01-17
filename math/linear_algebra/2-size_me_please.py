@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 def matrix_shape(matrix):
+    """ Define's the shape of a matrix"""
     shape = []
     shape.append(len(matrix))
 
@@ -11,10 +12,6 @@ def matrix_shape(matrix):
                 get_nested_shape.add(num_elements)
                 if isinstance(sub_list[0], list):
                     get_nested_shape |= nested_shape(sub_list)
-            else:
-                # Handle the case where sub_list is not a list (e.g., an integer)
-                num_elements = 1
-                get_nested_shape.add(num_elements)
                 
         return get_nested_shape
         

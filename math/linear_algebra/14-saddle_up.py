@@ -6,7 +6,7 @@ This script provides a function to evaluate matrix multiplication
 
 import numpy as np
 
- 
+
 def np_matmul(mat1, mat2):
     """
     Function to evaluate matrix multiplication

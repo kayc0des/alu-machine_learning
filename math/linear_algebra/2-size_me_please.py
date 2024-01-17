@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+"""
+This script provides a function to determine the shape of a matrix.
+"""
+
 def matrix_shape(matrix):
     """
     Determines the shape of a matrix.
@@ -20,7 +24,8 @@ def matrix_shape(matrix):
         - matrix (list): The input nested list.
 
         Returns:
-        - set: A set containing unique lengths of sublists in the nested structure.
+        - set: A set containing unique lengths of sublists 
+        in the nested structure.
         """
         get_nested_shape = set()
         for sub_list in matrix:

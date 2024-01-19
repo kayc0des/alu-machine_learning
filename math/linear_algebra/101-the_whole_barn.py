@@ -1,10 +1,13 @@
 #!/usr/bin/env python3
 """
-Slice like a ninja
+This script defines a fn that recursively adds two matrices
 """
 
 
 def add_matrices(mat1, mat2):
+    """
+    Function to add matrices
+    """
     def recursive_add(m1, m2):
         if isinstance(m1, list) and isinstance(m2, list):
             if len(m1) != len(m2):

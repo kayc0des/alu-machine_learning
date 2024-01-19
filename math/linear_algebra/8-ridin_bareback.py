@@ -8,7 +8,7 @@ def mat_mul(mat1, mat2):
     """
     Function to perform matrix multiplication
     """
-    # Check if the number of columns in mat1 is equal to the number of rows in mat2
+    # Check if number of columns in mat1 = number of rows in mat2
     if len(mat1[0]) != len(mat2):
         return None
 

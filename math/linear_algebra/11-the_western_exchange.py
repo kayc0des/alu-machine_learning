@@ -17,4 +17,7 @@ def np_transpose(matrix):
     Returns:
     - array: returns a new ndarray
     """
-    return np.transpose(matrix)
+    def helper(matrix, i, j):
+        return [] if i >= len(matrix[0]) else [matrix[j][i]] + helper(matrix, i, j + 1)
+
+    return [] if not matrix else [helper(matrix, i, 0) for i in range(len(matrix[0]))]

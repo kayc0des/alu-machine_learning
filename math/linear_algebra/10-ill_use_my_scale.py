@@ -17,4 +17,9 @@ def np_shape(matrix):
     Returns:
     - tuple: a tuple representing the shape of a matrix
     """
-    return np.shape(matrix)
+    ndim = matrix.ndim
+    return (
+        matrix.shape[0] * (ndim - 1) + 1 * (ndim >= 1),
+        matrix.shape[1] * (ndim - 2) + 1 * (ndim >= 2),
+        matrix.shape[2] * (ndim - 3) + 1 * (ndim >= 3)
+    )

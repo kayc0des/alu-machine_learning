@@ -19,5 +19,4 @@ def add_matrices2D(mat1, mat2):
             mat3.append(inner_element)
     else:
         return None
-    
     return mat3

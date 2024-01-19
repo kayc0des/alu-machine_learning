@@ -27,4 +27,4 @@ def cat_matrices(mat1, mat2, axis=0):
             return m1 + m2
 
     result = recursive_concat(mat1, mat2, 0)
-    return result
+    return result if result is not None else None

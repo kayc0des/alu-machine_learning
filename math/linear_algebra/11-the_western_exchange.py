@@ -4,9 +4,6 @@ This script provides a function to evaluate the transpose of a matrix
 """
 
 
-import numpy as np
-
-
 def np_transpose(matrix):
     """
     This function returns the transpose of a matrix

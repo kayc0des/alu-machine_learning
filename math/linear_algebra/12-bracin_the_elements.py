@@ -5,16 +5,26 @@ This script provides a function to concatenate two matrices along a specified ax
 
 
 def np_elementwise(mat1, mat2):
-    # Element-wise addition
-    add = [[elem1 + elem2 for elem1, elem2 in zip(row1, row2)] for row1, row2 in zip(mat1, mat2)]
-    
-    # Element-wise subtraction
-    sub = [[elem1 - elem2 for elem1, elem2 in zip(row1, row2)] for row1, row2 in zip(mat1, mat2)]
-    
-    # Element-wise multiplication
-    mul = [[elem1 * elem2 for elem1, elem2 in zip(row1, row2)] for row1, row2 in zip(mat1, mat2)]
-    
-    # Element-wise division
-    div = [[elem1 / elem2 for elem1, elem2 in zip(row1, row2)] for row1, row2 in zip(mat1, mat2)]
+    if isinstance(mat1, list) and isinstance(mat2, list):
+        # Element-wise addition
+        add = np_elementwise(mat1[0], mat2[0])
+        
+        # Element-wise subtraction
+        sub = np_elementwise(mat1[0], mat2[0])
+        
+        # Element-wise multiplication
+        mul = np_elementwise(mat1[0], mat2[0])
+        
+        # Element-wise division
+        div = np_elementwise(mat1[0], mat2[0])
 
-    return add, sub, mul, div
+        return add, sub, mul, div
+
+    else:
+        # Base case: elements are not lists, perform the operation
+        add = mat1 + mat2
+        sub = mat1 - mat2
+        mul = mat1 * mat2
+        div = mat1 / mat2
+
+        return add, sub, mul, div

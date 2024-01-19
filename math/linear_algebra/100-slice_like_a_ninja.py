@@ -22,7 +22,5 @@ def np_slice(matrix, axes={}):
             indices = slice(indices.start, axis_size, indices.step)
 
         result = [row[indices] if isinstance(row, list) else row for row in result]
-        final_result = result
 
-    return final_result
-
+    return [list(row) for row in result]

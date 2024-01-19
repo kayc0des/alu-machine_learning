@@ -5,26 +5,16 @@ This script provides a function to concatenate two matrices along a specified ax
 
 
 def np_elementwise(mat1, mat2):
-    if isinstance(mat1, list) and isinstance(mat2, list):
-        # Element-wise addition
-        add = np_elementwise(mat1[0], mat2[0])
-        
-        # Element-wise subtraction
-        sub = np_elementwise(mat1[0], mat2[0])
-        
-        # Element-wise multiplication
-        mul = np_elementwise(mat1[0], mat2[0])
-        
-        # Element-wise division
-        div = np_elementwise(mat1[0], mat2[0])
+    is_list = lambda x: isinstance(x, list)
 
-        return add, sub, mul, div
+    add = lambda x, y: x + y
+    sub = lambda x, y: x - y
+    mul = lambda x, y: x * y
+    div = lambda x, y: x / y
 
-    else:
-        # Base case: elements are not lists, perform the operation
-        add = mat1 + mat2
-        sub = mat1 - mat2
-        mul = mat1 * mat2
-        div = mat1 / mat2
+    add_result = list(map(add, np_elementwise(mat1[0], mat2[0]))) if is_list(mat1) and is_list(mat2) else mat1 + mat2
+    sub_result = list(map(sub, np_elementwise(mat1[0], mat2[0]))) if is_list(mat1) and is_list(mat2) else mat1 - mat2
+    mul_result = list(map(mul, np_elementwise(mat1[0], mat2[0]))) if is_list(mat1) and is_list(mat2) else mat1 * mat2
+    div_result = list(map(div, np_elementwise(mat1[0], mat2[0]))) if is_list(mat1) and is_list(mat2) else mat1 / mat2
 
-        return add, sub, mul, div
+    return add_result, sub_result, mul_result, div_result

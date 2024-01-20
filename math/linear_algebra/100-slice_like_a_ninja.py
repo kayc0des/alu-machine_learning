@@ -24,3 +24,5 @@ def np_slice(matrix, axes={}):
         result = [row[indices] if isinstance(row, list) else row for row in result]
 
     return [list(row) for row in result]
+    
+    

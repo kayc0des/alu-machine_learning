@@ -1,20 +1,13 @@
 #!/usr/bin/env python3
-"""
-This script provides a function to evaluate the transpose of a matrix
-"""
-
-
-import numpy as np
+'''
+    A function def np_transpose(matrix)
+    that transposes matrix:
+'''
 
 
 def np_transpose(matrix):
-    """
-    This function returns the transpose of a matrix
-
-    Paramters:
-    - matrix: an ndarray
-
-    Returns:
-    - array: returns a new ndarray
-    """
-    return np.transpose(matrix)
+    '''
+        A function def np_transpose(matrix)
+        that transposes matrix:
+    '''
+    return matrix.transpose()

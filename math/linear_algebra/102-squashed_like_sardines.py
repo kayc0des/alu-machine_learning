@@ -1,30 +1,42 @@
 #!/usr/bin/env python3
-"""
-This script defines a fn that recursively concatenates two matrices
-"""
+'''
+    A function def cat_matrices(mat1, mat2, axis=0)
+    that concatenates two matrices along a specific axis
+'''
+
+
+def matrix_shape(matrix):
+    """
+        Get the matrix shape
+    """
+    matrix_shape = []
+    while (type(matrix) is list):
+        matrix_shape.append(len(matrix))
+        matrix = matrix[0]
+    return matrix_shape
 
 
 def cat_matrices(mat1, mat2, axis=0):
     """
-    Function recursively concatenates two matrices
+        concatenate a matrix
     """
-    def recursive_concat(m1, m2, current_axis):
-        if isinstance(m1, list) and isinstance(m2, list):
-            if len(m1) != len(m2):
+    from copy import deepcopy
+    shape1 = matrix_shape(mat1)
+    shape2 = matrix_shape(mat2)
+    if len(shape1) != len(shape2):
+        return None
+    for i in range(len(shape1)):
+        if i != axis:
+            if shape1[i] != shape2[i]:
                 return None
-            if current_axis == axis:
-                return m1 + m2
-            result = []
-            for i in range(len(m1)):
-                sub_result = recursive_concat(m1[i], m2[i], current_axis + 1)
-                if sub_result is None:
-                    return None
-                result.append(sub_result)
-            return result
-        elif current_axis == axis:
-            return None
-        else:
-            return m1 + m2
+    return rec(deepcopy(mat1), deepcopy(mat2), axis, 0)
 
-    result = recursive_concat(mat1, mat2, 0)
-    return result if result is not None else None
+
+def rec(m1, m2, axis=0, current=0):
+    """
+        Do some reclusive calling
+    """
+    if axis != current:
+        return [rec(m1[i], m2[i], axis, current + 1) for i in range(len(m1))]
+    m1.extend(m2)
+    return m1

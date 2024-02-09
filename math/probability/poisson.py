@@ -20,3 +20,22 @@ class Poisson():
                 raise ValueError("data must contain multiple values")
             else:
                 self.lambtha = float(sum(data) / len(data))
+
+    def factorial(self, num):
+        """ Calculates num!"""
+        if not isinstance(num, int):
+            raise TypeError("Number must be an integer")
+        else:
+            return num * self.factorial(num-1)
+
+    def pmf(self, k):
+        """ Calculates the value of the PMF for a given number of successes"""
+        # assigning the value of euler's number to a variable e
+        e = 2.71828
+        try:
+            if not isinstance(k, int):
+                k = int(k)
+        except ValueError:
+            return 0
+        
+        return (e**-self.lambtha) * self.lambtha**k / self.factorial(k)

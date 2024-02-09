@@ -35,9 +35,9 @@ class Poisson():
         """ Calculates the value of the PMF for a given number of successes"""
         # assigning the value of euler's number to a variable e
         e = 2.718281828459045
-        try:
-            if not isinstance(k, int):
-                k = int(k)
-            return e ** -(self.lambtha) * self.lambtha**k / self.factorial(k)
-        except ValueError:
-            return 0
+        if k < 0:
+            return 1
+        
+        if not isinstance(k, int):
+            k = int(k)
+        return e ** -(self.lambtha) * self.lambtha**k / self.factorial(k)

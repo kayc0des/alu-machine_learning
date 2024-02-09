@@ -23,10 +23,13 @@ class Poisson():
 
     def factorial(self, num):
         """ Calculates num!"""
-        if not isinstance(num, int):
-            raise TypeError("Number must be an integer")
-        else:
-            return num * self.factorial(num-1)
+        values = [num for num in range(1, num+1)]
+        factorial = 1
+        if num == 0:
+            return 1
+        for value in values:
+            factorial *= value
+        return factorial
 
     def pmf(self, k):
         """ Calculates the value of the PMF for a given number of successes"""
@@ -35,6 +38,6 @@ class Poisson():
         try:
             if not isinstance(k, int):
                 k = int(k)
-                return (e**-self.lambtha) * self.lambtha**k / self.factorial(k)
+            return e ** -(self.lambtha) * self.lambtha**k / self.factorial(k)
         except ValueError:
             return 0

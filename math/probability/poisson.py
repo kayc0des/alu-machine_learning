@@ -38,5 +38,5 @@ class Poisson():
         if not isinstance(k, int):
             k = int(k)
         if k <= 0:
-            return 1
+            return 0
         return e ** -(self.lambtha) * self.lambtha**k / self.factorial(k)

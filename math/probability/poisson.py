@@ -39,4 +39,4 @@ class Poisson():
             k = int(k)
         if k <= 0:
             return 0
-        return e ** -(self.lambtha) * self.lambtha**k / self.factorial(k)
+        return e ** -(float(self.lambtha)) * float(self.lambtha)**k / self.factorial(k)

@@ -3,6 +3,7 @@
     Create a class that represents the poisson distribution
 '''
 
+
 class Poisson():
     """ This class represents a poisson distribution """
 

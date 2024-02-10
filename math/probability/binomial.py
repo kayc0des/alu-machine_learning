@@ -33,7 +33,7 @@ class Binomial():
             self.n = n
             self.p = p
 
-    def factorial(self, num):
+    def fact(self, num):
         """ Calculates num!"""
         values = [num for num in range(1, num+1)]
         factorial = 1
@@ -45,7 +45,7 @@ class Binomial():
 
     def comb(self, n, r):
         """ calculates the combination nCr"""
-        return float(self.factorial(n) / self.factorial(n - r) * self.factorial(r))
+        return float(self.fact(n) / self.fact(n - r) * self.fact(r))
 
     def pmf(self, k):
         """ calculates pmf """
@@ -54,4 +54,4 @@ class Binomial():
         if k <= 0:
             return 0
         q = 1 - self.p
-        return self.comb(self.n, k) * self.p ** k * q ** (self.n - k)
+        return self.comb(self.n, k) * self.p ** k * q ** self.n - k

@@ -53,12 +53,10 @@ class Binomial():
             k = int(k)
         if k < 0:
             return 0
-        p = self.p
-        n = self.n
-        q = 1 - p
-        combination = self.comb(n, k)
-        return combination * (p ** k) * (q ** (n-k))
-  
+        q = 1 - self.p
+        combination = self.comb(self.n, k)
+        return combination * (self.p ** k) * (q ** (self.n-k))
+
     def cdf(self, k):
         """ calculates the cdf """
         if not isinstance(k, int):

@@ -19,3 +19,12 @@ class Exponential():
                 raise ValueError("data must contain multiple values")
             else:
                 self.lambtha = 1 / float(sum(data) / len(data))
+
+    def pdf(self, x):
+        """ calculates the probability density function """
+        # assigning the value of euler's number to a variable e
+        e = 2.7182818285
+        if x < 0:
+            return 0
+        return self.lambtha * (e ** (-(self.lambtha) * x))
+        

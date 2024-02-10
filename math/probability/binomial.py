@@ -51,7 +51,7 @@ class Binomial():
         """ calculates pmf """
         if not isinstance(k, int):
             k = int(k)
-        if k <= 0:
+        if k < 0:
             return 0
         q = 1 - self.p
         return self.comb(self.n, k) * self.p ** k * q ** self.n - k

@@ -10,7 +10,7 @@ class Binomial():
     def __init__(self, data=None, n=1, p=0.5):
         """ initialization method """
         if data is None:
-            if n <=0:
+            if n <= 0:
                 raise ValueError('n must be a postive value')
             if p < 0 or p > 1:
                 raise ValueError('p must be greater than 0 and less than 1')
@@ -24,6 +24,8 @@ class Binomial():
             # Calculate p by counting successes
             successes = sum(1 for x in data if x == 1)
             p = successes / len(data)
+            if p < 0 or p > 1:
+                raise ValueError("Invalid probability in data")
             # Calculate n using the formula n = sum(data) / p
             self.n = round(sum(data) / p)
             # Recalculate p based on the rounded n

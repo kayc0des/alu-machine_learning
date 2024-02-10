@@ -61,7 +61,7 @@ class Binomial():
         """ calculates the cdf """
         if not isinstance(k, int):
             k = int(k)
-        if k <= 0:
+        if k < 0:
             return 0
         cdf = 0
         for i in range(k + 1):

@@ -34,7 +34,7 @@ class Poisson():
     def pmf(self, k):
         """ Calculates the value of the PMF for a given number of successes"""
         # assigning the value of euler's number to a variable e
-        e = 2.718281828459045
+        e = 2.7182818285
         if not isinstance(k, int):
             k = int(k)
         if k <= 0:
@@ -43,7 +43,7 @@ class Poisson():
     
     def cdf(self, k):
         """ calculates the cumulative distribution"""
-        e = 2.718281828459045
+        e = 2.7182818285
         if not isinstance(k, int):
             k = int(k)
         if k <= 0:

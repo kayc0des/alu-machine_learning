@@ -25,10 +25,32 @@ class Binomial():
             summation = 0
             for x in data:
                 summation += ((x - mean) ** 2)
-            variance = (summation / len(data))
+            variance = summation / len(data)
             q = variance / mean
-            p = (1 - q)
+            p = 1 - q
             n = round(mean / p)
             p = float(mean / n)
             self.n = n
             self.p = p
+
+    def factorial(self, num):
+        """ Calculates num!"""
+        values = [num for num in range(1, num+1)]
+        factorial = 1
+        if num == 0:
+            return 1
+        for value in values:
+            factorial *= value
+        return factorial
+    
+    def comb(self, n, r):
+        """ calculates the combination nCr"""
+        return self.factorial(n) / self.factorial(n - r) * self.factorial(r)
+
+    def pmf(self, k):
+        """ calculates pmf """
+        if not isinstance(k, int):
+            k = int(k)
+        if k <= 0:
+            return 0
+        return self.comb(self.n, k) * self.p ** k * self.q ** (self.n - k)

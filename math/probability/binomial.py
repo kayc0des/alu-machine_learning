@@ -54,4 +54,4 @@ class Binomial():
         if k < 0:
             return 0
         q = 1 - self.p
-        return float(self.comb(self.n, k)) * self.p ** k * q ** self.n - k
+        return float(self.comb(self.n, k)) * (self.p ** k) * q ** (self.n - k)

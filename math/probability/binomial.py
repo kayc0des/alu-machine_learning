@@ -42,7 +42,7 @@ class Binomial():
         for value in values:
             factorial *= value
         return factorial
-    
+
     def comb(self, n, r):
         """ calculates the combination nCr"""
         return self.factorial(n) / self.factorial(n - r) * self.factorial(r)
@@ -53,4 +53,4 @@ class Binomial():
             k = int(k)
         if k <= 0:
             return 0
-        return self.comb(self.n, k) * self.p ** k * self.q ** (self.n - k)
+        return self.comb(self.n, k) * self.p ** k * (1 - self.p) ** (self.n - k)

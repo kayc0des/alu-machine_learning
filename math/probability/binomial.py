@@ -45,7 +45,7 @@ class Binomial():
 
     def comb(self, n, r):
         """ calculates the combination nCr"""
-        return self.fact(n) / self.fact(n - r) * self.fact(r)
+        return self.fact(n) / (self.fact(n - r) * self.fact(r))
 
     def pmf(self, k):
         """ calculates pmf """
@@ -58,7 +58,7 @@ class Binomial():
         q = 1 - p
         combination = self.comb(n, k)
         return combination * (p ** k) * (q ** (n-k))
-    
+  
     def cdf(self, k):
         """ calculates the cdf """
         if not isinstance(k, int):

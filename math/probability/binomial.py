@@ -10,9 +10,9 @@ class Binomial():
     def __init__(self, data=None, n=1, p=0.5):
         """ initialization method """
         if data is None:
-            if n <= 0:
+            if n < 1:
                 raise ValueError('n must be a postive value')
-            if p < 0 or p > 1:
+            if p <= 0 or p >= 1:
                 raise ValueError('p must be greater than 0 and less than 1')
             self.n = round(n)
             self.p = float(p)

@@ -40,3 +40,16 @@ class Poisson():
         if k <= 0:
             return 0
         return e ** -(self.lambtha) * (self.lambtha)**k / self.factorial(k)
+    
+    def cdf(self, k):
+        """ calculates the cumulative distribution"""
+        e = 2.718281828459045
+        if not isinstance(k, int):
+            k = int(k)
+        if k <= 0:
+            return 0
+        sample_space = [i for i in range(0, k+1)]
+        cdf = 0
+        for value in sample_space:
+            cdf += e ** -(self.lambtha) * (self.lambtha)**value / self.factorial(value)
+        return cdf

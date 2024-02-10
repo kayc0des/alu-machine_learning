@@ -27,12 +27,10 @@ class Exponential():
         if x < 0:
             return 0
         return self.lambtha * (e ** (-(self.lambtha) * x))
-    
+
     def cdf(self, x):
         """ Returns the value of the cdf """
+        e = 2.7182818285
         if x < 0:
             return 0
-        cdf = 0
-        for i in range(x + 1):
-            cdf += self.pdf(i)
-        return cdf
+        return 1 - (e ** (-(self.lambtha) * x))

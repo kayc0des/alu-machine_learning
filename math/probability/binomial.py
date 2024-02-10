@@ -21,12 +21,14 @@ class Binomial():
                 raise TypeError('data must be a list')
             if len(data) < 2:
                 raise ValueError("data must contain multiple values")
-            # Calculate p by counting successes
-            successes = sum(1 for x in data if x == 1)
-            p = successes / len(data)
-            if p == 0 or p == 1:
-                raise ValueError("Invalid probability in data")
-            # Calculate n using the formula n = sum(data) / p
-            self.n = round(sum(data) / p)
-            # Recalculate p based on the rounded n
-            self.p = successes / self.n
+            mean = float(sum(data) / len(data))
+            summation = 0
+            for x in data:
+                summation += ((x - mean) ** 2)
+            variance = (summation / len(data))
+            q = variance / mean
+            p = (1 - q)
+            n = round(mean / p)
+            p = float(mean / n)
+            self.n = n
+            self.p = p

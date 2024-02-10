@@ -53,4 +53,5 @@ class Binomial():
             k = int(k)
         if k <= 0:
             return 0
-        return self.comb(self.n, k) * self.p ** k * (1 - self.p) ** (self.n - k)
+        q = 1 - self.p
+        return self.comb(self.n, k) * self.p ** k * q ** (self.n - k)

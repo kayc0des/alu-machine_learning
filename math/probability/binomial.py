@@ -45,7 +45,7 @@ class Binomial():
 
     def comb(self, n, r):
         """ calculates the combination nCr"""
-        return self.factorial(n) / self.factorial(n - r) * self.factorial(r)
+        return float(self.factorial(n) / self.factorial(n - r) * self.factorial(r))
 
     def pmf(self, k):
         """ calculates pmf """

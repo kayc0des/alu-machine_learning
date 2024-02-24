@@ -5,11 +5,12 @@ from PIL import Image
 file = cv2.imread('/Users/kayc0des/dev/learning/Machine Learning/alu-machine_learning/math/convolutions_and_pooling/convolutions_playground/images/laughter.jpeg')
 image = np.array(file)
 
-# black and white filter 
-kernel = np.full((3, 3, 3), 1/3)
-
 #alternative 
 main_kernel = np.full((3, 3, 1), 1/9)
+
+kernel = np.array([[0.299, 0.587, 0.114],
+                   [0.299, 0.587, 0.114],
+                   [0.299, 0.587, 0.114]])
 
 def black_white(image, kernel):
     ''' Returns a black and white photo'''

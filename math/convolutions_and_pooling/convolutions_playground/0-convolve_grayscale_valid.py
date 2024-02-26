@@ -11,7 +11,7 @@ kernel = np.array([[1, 0, -1],
                    [1, 0, -1],
                    [1, 0, -1]])
 
-def convolve_grayscale(images, kernel):
+def convolve_grayscale_valid(images, kernel):
     ''' This function performs a vlaid convolution on 
     grayscale images (one channel)'''
 
@@ -40,4 +40,10 @@ if __name__ == '__main__':
     dataset = np.load('/Users/kayc0des/dev/learning/Machine Learning/alu-machine_learning/math/convolutions_and_pooling/convolutions_playground/data/mnist.npz')
     images = dataset['x_train']
     print(images.shape)
-    print(convolve_grayscale(images, kernel))
+    images_conv = convolve_grayscale_valid(images, kernel)
+    print(images_conv.shape)
+
+    plt.imshow(images[0], cmap='gray')
+    plt.show()
+    plt.imshow(images_conv[0], cmap='gray')
+    plt.show()

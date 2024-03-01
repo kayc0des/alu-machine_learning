@@ -1,45 +1,56 @@
 #!/usr/bin/env python3
+"""
+    a function def determinant(matrix):
+    that calculates the determinant of a matrix:
+"""
 
-''' This function returns the determinant of a matrix '''
 
 def determinant(matrix):
     """
-    Calculates the determinant of a square matrix.
+    Calculates the determinant of a matrix
 
     Args:
-        matrix: A list of lists representing a square matrix.
+        - matrix: list of lists whose determinant
 
     Returns:
-        The determinant of the matrix.
+        - the determinant of matrix
 
-    Raises:
-        TypeError: If the input is not a list of lists.
-        ValueError: If the matrix is not square.
     """
-
-    # Check for valid input type
-    if not isinstance(matrix, list) or not all(isinstance(row, list) for row in matrix):
+    # Check if the input is a list of lists
+    if type(matrix) is not list:
         raise TypeError("matrix must be a list of lists")
-
-    # Check for square matrix
-    n = len(matrix)
-    if any(len(row) != n for row in matrix):
-        raise ValueError("matrix must be a square matrix")
-
-    # Base cases:
-    if n == 0:  # 0x0 matrix
-        return 1
-    elif n == 1:  # 1x1 matrix
+    height = len(matrix)
+    if height is 0:
+        raise TypeError("matrix must be a list of lists")
+    for row in matrix:
+        if type(row) is not list:
+            raise TypeError("matrix must be a list of lists")
+        if len(row) is 0 and height is 1:
+            return 1
+        if len(row) != height:
+            raise ValueError("matrix must be a square matrix")
+    if height is 1:
         return matrix[0][0]
-
-    # Recursive calculation using cofactor expansion
-    det = 0
-    for i in range(n):
-        det += (-1) ** i * matrix[0][i] * determinant(minor(matrix, 0, i))
-    return det
-
-def minor(matrix, i, j):
-    """
-    Calculates the minor matrix by removing row i and column j.
-    """
-    return [row[:j] + row[j+1:] for row in (matrix[:i] + matrix[i+1:])]
+    if height is 2:
+        a = matrix[0][0]
+        b = matrix[0][1]
+        c = matrix[1][0]
+        d = matrix[1][1]
+        return (a * d) - (b * c)
+    multiplier = 1
+    determinant = 0
+    for i in range(height):
+        element = matrix[0][i]
+        sub_matrix = []
+        for row in range(height):
+            if row == 0:
+                continue
+            new_row = []
+            for column in range(height):
+                if column == i:
+                    continue
+                new_row.append(matrix[row][column])
+            sub_matrix.append(new_row)
+        determinant += (element * multiplier * determinant(sub_matrix))
+        multiplier *= -1
+    return determinant

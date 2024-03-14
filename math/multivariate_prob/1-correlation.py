@@ -26,7 +26,10 @@ def correlation(C):
     if not isinstance(C, np.ndarray):
         raise TypeError('C must be a numpy.ndarray')
 
-    d = C.ndim
+    if C.ndim != 2:
+        raise ValueError('C must be a 2D square matrix')
+
+    d = C.shape[0]
 
     if C.shape[0] != d or C.shape[1] != d:
         raise ValueError('C must be a 2D square matrix')

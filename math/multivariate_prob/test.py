@@ -1,27 +1,12 @@
-import numpy as np 
+import numpy as np
 
-array = np.array([[90, 80, 5],
-                 [60, 30, 9],
-                 [100, 70, -1]])
-sum_array = np.sum(array, axis=0)
-mean = sum_array/3
+# Example dataset
+data = np.array([[1, 2, 3],
+                 [4, 5, 6],
+                 [7, 8, 9]])
 
-num_colums = array.shape[1]
+# Calculate the correlation matrix
+correlation_matrix = np.corrcoef(data, rowvar=False)
 
-variance = []
-
-difference_array = np.zeros((3,3))
-
-for i in range(num_colums):
-    column = array[:, i]
-    squared_difference = np.sum((column - mean[i]) **2)
-    value = squared_difference/(array.shape[0] - 1)
-    variance.append(value)
-
-    # step 7
-    difference = column - mean[i]
-    difference_array[i] = difference
-
-print(f'mean = {mean}')
-print(f'variance = {variance}')
-print(difference_array)
+print("Correlation Matrix:")
+print(correlation_matrix)

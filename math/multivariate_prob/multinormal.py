@@ -17,7 +17,7 @@ class MultiNormal():
         """ Init method """
         if not isinstance(data, np.ndarray) or data.ndim != 2:
             raise TypeError('data must be a 2D numpy.ndarray')
-        n, d = data.shape
+        d, n = data.shape
 
         # ensure data contains multiple data points
         if n < 2:

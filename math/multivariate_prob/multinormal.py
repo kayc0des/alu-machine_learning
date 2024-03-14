@@ -25,4 +25,4 @@ class MultiNormal():
 
         # set public instance variables mean and cov
         self.mean = np.mean(data, axis=1, keepdims=True)
-        self.cov = np.dot((data - self.mean).T, data - self.mean) / (d - 1)
+        self.cov = np.dot((data - self.mean), (data - self.mean).T) / (n - 1)

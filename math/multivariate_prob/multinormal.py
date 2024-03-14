@@ -17,13 +17,13 @@ class MultiNormal():
         """ Init method """
         if not isinstance(data, np.ndarray) or data.ndim != 2:
             raise TypeError('data must be a 2D numpy.ndarray')
-        d, n = data.shape
+        n, d = data.shape
 
         # ensure data contains multiple data points
         if n < 2:
             raise ValueError('data must contain multiple data points')
 
         # set public instance variables mean and cov
-        self.mean = np.mean(data, keepdims=True)
+        self.mean = np.mean(data, axis=0, keepdims=True)
         self.cov = np.dot((data - self.mean).T, data - self.mean) / (n - 1)
  

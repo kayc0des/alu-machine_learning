@@ -33,4 +33,3 @@ def correlation(C):
 
     correlation_matrix = np.corrcoef(C, rowvar=False)
     return correlation_matrix
-

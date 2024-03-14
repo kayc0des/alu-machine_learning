@@ -30,7 +30,8 @@ def mean_cov(X):
 
     sum_x = np.sum(X, axis=0)
     mean = sum_x/n
-    
-    return mean
 
-print(mean_cov(X))
+    # Compute the covariance matrix of the data set
+    cov = np.dot((X - mean).T, X - mean) / (n - 1)
+    
+    return mean, cov

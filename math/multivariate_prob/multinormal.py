@@ -8,7 +8,7 @@ This script represents a Multivariate normal distributiion
 import numpy as np
 
 
-class Multinomial():
+class MultiNormal():
     """
     This class reps a Multivariate Gaussian Distribution
     """

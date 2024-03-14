@@ -9,8 +9,9 @@ import numpy as np
 
 np.random.seed(0)
 X = np.random.multivariate_normal([12,30,10], [[36, -30, 15],
-                                               [-30,100,-20],
+                                               [-30, 100, -20],
                                                [15, -20, 25]], 10000)
+
 
 def mean_cov(X):
     '''
@@ -35,3 +36,5 @@ def mean_cov(X):
     cov = np.dot((X - mean).T, X - mean) / (n - 1)
     
     return mean, cov
+
+print(mean_cov(X))

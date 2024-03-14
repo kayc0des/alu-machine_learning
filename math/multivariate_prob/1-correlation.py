@@ -4,7 +4,7 @@ This script calculates a correlation matrix
 """
 
 
-#import necessary modules
+# import necessary modules
 import numpy as np
 
 
@@ -30,6 +30,7 @@ def correlation(C):
 
     if C.shape[0] != d or C.shape[1] != d:
         raise ValueError('C must be a 2D square matrix')
-    
+
     correlation_matrix = np.corrcoef(C, rowvar=False)
     return correlation_matrix
+

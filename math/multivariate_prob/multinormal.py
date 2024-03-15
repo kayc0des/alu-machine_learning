@@ -52,3 +52,4 @@ class MultiNormal():
         pdf = norm_constant * exp
 
         return pdf
+    

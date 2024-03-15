@@ -49,6 +49,6 @@ class MultiNormal():
         quad = -0.5 * ((x - self.mean).T @ np.linalg.inv(self.cov) @ (x - self.mean))
         exp = np.exp(quad)
 
-        pdf = norm_constant * exp
+        pdf = float(norm_constant * exp)
 
         return pdf

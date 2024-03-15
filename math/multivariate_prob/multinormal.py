@@ -35,8 +35,8 @@ class MultiNormal():
             raise TypeError('x must be a numpy.ndarray')
         # d is the number of dimensions
         d = x.shape[0]
-        if x.shape[1] != 1:
-            raise ValueError(f'x must have the shape ({d}, 1)')
+        if x.shape != (d, 1):
+            raise ValueError('x must have the shape ({d}, 1)')
 
         # get the determinant of the covariance matrix
         det_cov = np.linalg.det(self.cov)
@@ -46,8 +46,8 @@ class MultiNormal():
         norm_constant = 1 / ((2 * pi) ** (d / 2)) * (det_cov ** 0.5)
 
         # evaluate exponential quadratic
-        quadratic = -0.5 * ((x - self.mean).T @ np.linalg.inv(self.cov) @ (x - self.mean))
-        exp = np.exp(quadratic)
+        quad = -0.5 * ((x - self.mean).T @ np.linalg.inv(self.cov) @ (x - self.mean))
+        exp = np.exp(quad)
 
         pdf = norm_constant * exp
 

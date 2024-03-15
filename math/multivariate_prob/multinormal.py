@@ -39,16 +39,11 @@ class MultiNormal():
             raise ValueError('x must have the shape (' + str(d) + ', 1)')
 
         # get the determinant of the covariance matrix
-        det_cov = np.linalg.det(self.cov)
-        pi = 3.141592653589793
-
-        # evaluate normalization constant
-        norm_constant = 1 / ((2 * pi) ** (d / 2)) * (det_cov ** 0.5)
-
-        # evaluate exponential quadratic
-        quad = -0.5 * ((x - self.mean).T @ np.linalg.inv(self.cov) @ (x - self.mean))
-        exp = np.exp(quad)
-
-        pdf = float(norm_constant * exp)
+        det = np.linalg.det(self.cov)
+        inv = np.linalg.inv(self.cov)
+        pdf = 1.0 / np.sqrt(((2 * np.pi) ** d) * det)
+        mult = np.matmul(np.matmul((x - self.mean).T, inv), (x - self.mean))
+        pdf *= np.exp(-0.5 * mult)
+        pdf = pdf[0][0]
 
         return pdf

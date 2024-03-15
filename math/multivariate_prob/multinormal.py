@@ -26,3 +26,29 @@ class MultiNormal():
         # set public instance variables mean and cov
         self.mean = np.mean(data, axis=1, keepdims=True)
         self.cov = np.dot((data - self.mean), (data - self.mean).T) / (n - 1)
+
+    def pdf(self, x):
+        """
+        Calculates the PDF at a data point
+        """
+        if not isinstance(x, np.ndarray):
+            raise TypeError('x must be a numpy.ndarray')
+        # d is the number of dimensions
+        d = x.shape[0]
+        if x.shape != (d, 1):
+            raise ValueError('x must have thw shape ({d}, 1)')
+
+        # get the determinant of the covariance matrix
+        det_cov = np.linalg.det(self.cov)
+        pi = np.pi
+
+        # evaluate normalization constant
+        norm_constant = 1 / ((2 * pi) ** (d / 2)) * (det_cov ** 0.5)
+
+        # evaluate exponential quadratic
+        quadratic = -0.5 * ((x - self.mean).T @ np.linalg.inv(self.cov) @ (x - self.mean))
+        exp = np.exp(quadratic)
+
+        pdf = norm_constant * exp
+
+        return pdf

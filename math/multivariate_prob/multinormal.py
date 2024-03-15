@@ -40,7 +40,7 @@ class MultiNormal():
 
         # get the determinant of the covariance matrix
         det_cov = np.linalg.det(self.cov)
-        pi = np.pi
+        pi = 3.141592653589793
 
         # evaluate normalization constant
         norm_constant = 1 / ((2 * pi) ** (d / 2)) * (det_cov ** 0.5)

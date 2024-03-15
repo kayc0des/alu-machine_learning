@@ -36,7 +36,7 @@ class MultiNormal():
         # d is the number of dimensions
         d = x.shape[0]
         if x.shape != (d, 1):
-            raise ValueError('x must have thw shape ({d}, 1)')
+            raise ValueError(f'x must have the shape ({d}, 1)')
 
         # get the determinant of the covariance matrix
         det_cov = np.linalg.det(self.cov)

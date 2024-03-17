@@ -1,3 +1,5 @@
+# Bayes Theorem
+
 ## Learning Objectives
 
 - What is Bayesian Probability?

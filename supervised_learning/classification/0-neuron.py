@@ -10,7 +10,7 @@ class Neuron():
     """ Define's a single Neuron """
 
     # declare public instance attributes
-    W = np.random.randn()
+    W = np.random.randn(1, 784)
     b = 0
     A = 0
 

@@ -8,7 +8,7 @@ a single neuron performing binary classification.
 import numpy as np
 
 
-class Neuron():
+class Neuron(object):
     """ Define's a single Neuron """
 
     def __init__(self, nx):
@@ -24,19 +24,22 @@ class Neuron():
         self.nx = nx
 
         # Set private instance attributes
-        self._W = np.random.randn(1, self.nx)
-        self._b = 0
-        self._A = 0
+        self.__W = np.random.randn(1, self.nx)
+        self.__b = 0
+        self.__A = 0
 
     # Getter function to access the private attributes
-    def get_W(self):
+    @property
+    def Get_W(self):
         ''' Return W '''
-        return self._W
+        return self.__W
 
-    def get_b(self):
+    @property
+    def Get_B(self):
         ''' Return b '''
-        return self._b
+        return self.__b
 
-    def get_A(self):
+    @property
+    def Get_A(self):
         ''' Return A '''
-        return self._A
+        return self.__A

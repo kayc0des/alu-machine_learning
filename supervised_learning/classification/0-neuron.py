@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-""" 
+"""
 This script defines a class Neuron that defines
 a single neuron performing binary classification.
 """
@@ -22,6 +22,8 @@ class Neuron():
         if nx < 1:
             raise ValueError('nx must be a positive integer')
         self.nx = nx
+
+        # Set public instance attributes
         self.W = np.random.randn(1, self.nx)
         self.b = 0
         self.A = 0

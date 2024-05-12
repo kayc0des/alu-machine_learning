@@ -30,16 +30,16 @@ class Neuron(object):
 
     # Getter function to access the private attributes
     @property
-    def Get_W(self):
+    def W(self):
         ''' Return W '''
         return self.__W
 
     @property
-    def Get_B(self):
+    def b(self):
         ''' Return b '''
         return self.__b
 
     @property
-    def Get_A(self):
+    def A(self):
         ''' Return A '''
         return self.__A

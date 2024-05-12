@@ -24,16 +24,19 @@ class Neuron():
         self.nx = nx
 
         # Set private instance attributes
-        self.__W = np.random.randn(1, self.nx)
-        self.__b = 0
-        self.__A = 0
+        self._W = np.random.randn(1, self.nx)
+        self._b = 0
+        self._A = 0
 
     # Getter function to access the private attributes
     def get_W(self):
-        return self.__W
+        ''' Return W '''
+        return self._W
 
     def get_b(self):
-        return self.__b
+        ''' Return b '''
+        return self._b
 
     def get_A(self):
-        return self.__A
+        ''' Return A '''
+        return self._A

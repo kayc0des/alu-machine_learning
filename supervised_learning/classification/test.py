@@ -44,6 +44,31 @@ class Neuron(object):
         ''' Return A '''
         return self.__A
 
+    def forward_prop(self, X):
+        ''' Method performs forward propagation '''
+        z = np.dot(self.__W, X) + self.__b
+        self.__A = 1 / (1 + np.exp(-z))
+        return self.__A
 
-neuron = Neuron(3)
-print(neuron.Get_B)
+    def cost(self, Y, A):
+        ''' Calculates the cost of the model'''
+        m = Y.shape[1] # number of examples
+        cost = -1/m * np.sum(Y * np.log(A)) - ((1 - Y) * np.log(1.0000001 - A))
+        return cost
+
+
+''' Debug '''
+lib_train = np.load('data/Binary_Train.npz') # load dataset
+X_3D, Y = lib_train['X'], lib_train['Y']
+X = X_3D.reshape((X_3D.shape[0], -1)).T
+
+print(f'The shape of X_3D is -> {X_3D.shape}')
+print(f'The shape of Y is -> {Y.shape}')
+print(f'The shape of X is -> {X.shape}')
+
+test = np.array([[1, 2, 3],
+                 [4, 5, 6],
+                 [7, 8, 9],
+                 [1, 3, 4]])
+
+print(test.shape)

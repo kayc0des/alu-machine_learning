@@ -56,7 +56,7 @@ class Neuron(object):
         sum = np.sum((Y * np.log(A)) + ((1 - Y) * np.log(1.0000001 - A)))
         cost = -1/m * sum
         return cost
-    
+
     def evaluate(self, X, Y):
         ''' Evaluates the neuron's prediction '''
         A_hat = self.forward_prop(X)

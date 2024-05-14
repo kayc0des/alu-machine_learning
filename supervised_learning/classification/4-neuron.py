@@ -52,7 +52,7 @@ class Neuron(object):
 
     def cost(self, Y, A):
         ''' Calculates the cost of the model'''
-        m = self.nx  # number of examples
+        m = Y.shape[1]  # number of examples
         sum = np.sum((Y * np.log(A)) + ((1 - Y) * np.log(1.0000001 - A)))
         cost = -1/m * sum
         return cost

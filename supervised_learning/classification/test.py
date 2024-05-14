@@ -55,6 +55,13 @@ class Neuron(object):
         m = self.nx # number of examples
         cost = -1/m * np.sum((Y * np.log(A)) + ((1.000001 - Y) * np.log(1.0000001 - A)))
         return cost
+    
+    def evaluate(self, X, Y):
+        ''' Evaluates the neuron's prediction '''
+        A_hat = self.forward_prop(X)
+        A = np.where(A_hat > 0.5, 1, 0)
+        cost = self.cost(Y, A_hat)
+        return A, cost
 
 
 ''' Debug '''
@@ -70,14 +77,9 @@ print(f'The shape of X is -> {X.shape}')
 
 np.random.seed(0)
 neuron = Neuron(X.shape[0])
-
-# predict y-hat
-A = neuron.forward_prop(X)
-print(f'The shape of A is -> {A.shape}')
-
-cost = neuron.cost(Y, A)
+A, cost = neuron.evaluate(X, Y)
+print(A)
 print(cost)
-
 
 
 # test = np.array([[[1, 2, 3],

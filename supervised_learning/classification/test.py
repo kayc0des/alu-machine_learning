@@ -52,8 +52,8 @@ class Neuron(object):
 
     def cost(self, Y, A):
         ''' Calculates the cost of the model'''
-        m = Y.shape[1] # number of examples
-        cost = -1/m * np.sum(Y * np.log(A)) - ((1 - Y) * np.log(1.0000001 - A))
+        m = self.nx # number of examples
+        cost = -1/m * np.sum((Y * np.log(A)) + ((1.000001 - Y) * np.log(1.0000001 - A)))
         return cost
 
 
@@ -62,13 +62,34 @@ lib_train = np.load('data/Binary_Train.npz') # load dataset
 X_3D, Y = lib_train['X'], lib_train['Y']
 X = X_3D.reshape((X_3D.shape[0], -1)).T
 
+# ------------------------------------------ #
 print(f'The shape of X_3D is -> {X_3D.shape}')
 print(f'The shape of Y is -> {Y.shape}')
 print(f'The shape of X is -> {X.shape}')
+# ------------------------------------------ #
 
-test = np.array([[1, 2, 3],
-                 [4, 5, 6],
-                 [7, 8, 9],
-                 [1, 3, 4]])
+np.random.seed(0)
+neuron = Neuron(X.shape[0])
 
-print(test.shape)
+# predict y-hat
+A = neuron.forward_prop(X)
+print(f'The shape of A is -> {A.shape}')
+
+cost = neuron.cost(Y, A)
+print(cost)
+
+
+
+# test = np.array([[[1, 2, 3],
+#                  [4, 5, 6],
+#                  [7, 8, 9],
+#                  [1, 3, 4]], 
+#                  [[1, 2, 3],
+#                  [4, 5, 6],
+#                  [7, 8, 9],
+#                  [1, 3, 4]],])
+
+# new_array = test.reshape((test.shape[0], -1)).T
+# print(test.shape)
+# print(new_array)
+# print(new_array.shape)

@@ -68,21 +68,17 @@ class Neuron(object):
         # Evaluate the partial derivatives of the cost function
     
         # Evaluate the partial derivatives of the cost function
+        m = Y.shape[1]
+        
+        # Compute the error between predicted activation and true labels
         dz = A - Y
-        print(f'shape of A -> {A.shape}')
-        print(f'shape of Y -> {Y.shape}')
-        print(f'shape of dz -> {dz.shape}')
-    
-        dw = np.dot(X, dz.T)
-        db = np.sum(dz, axis=0)
-    
-        # Update the private attributes __W and __b
-        self.__W = self.__W - (alpha * dw)
-        self.__b = self.__b - (alpha * db)
-    
-        print(f'shape __W -> {self.__W.shape}')
-    
-        return self.__W, self.__b
+
+        # Update weights and bias
+        dw = np.dot(X, dz.T) / m
+        db = np.sum(dz) / m
+        
+        self.__W -= alpha * dw.T
+        self.__b -= alpha * db
 
 
 ''' Debug '''

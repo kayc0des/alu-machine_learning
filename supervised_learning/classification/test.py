@@ -66,14 +66,16 @@ class Neuron(object):
     def gradient_descent(self, X, Y, A, alpha=0.5):
         ''' Calculates one pass of gradient descent '''
         # Evaluate the partial derivatives of the cost function
+        A = A.reshape(-1, 1)
         dz = A - Y
-        print(f'shape of dz -> {dz.T.shape}')
-        print(f'shape of X -> {X.shape}')
+        print(f'shape of A -> {A.T.shape}')
+        print(f'shape of Y -> {Y.shape}')
         dw = np.dot(X, dz.T)
         db = dz
         # update the private attributes __W and __b
         self.__W = self.__W - (alpha * dw)
         self.__b = self.__b - (alpha * db)
+        print(f'shape __W -> {self.__W.shape}')
         return self.__W, self.__b
 
 

@@ -66,16 +66,22 @@ class Neuron(object):
     def gradient_descent(self, X, Y, A, alpha=0.5):
         ''' Calculates one pass of gradient descent '''
         # Evaluate the partial derivatives of the cost function
-        A = A.reshape(-1, 1)
+    
+        # Evaluate the partial derivatives of the cost function
         dz = A - Y
-        print(f'shape of A -> {A.T.shape}')
+        print(f'shape of A -> {A.shape}')
         print(f'shape of Y -> {Y.shape}')
+        print(f'shape of dz -> {dz.shape}')
+    
         dw = np.dot(X, dz.T)
-        db = dz
-        # update the private attributes __W and __b
+        db = np.sum(dz, axis=0)
+    
+        # Update the private attributes __W and __b
         self.__W = self.__W - (alpha * dw)
         self.__b = self.__b - (alpha * db)
+    
         print(f'shape __W -> {self.__W.shape}')
+    
         return self.__W, self.__b
 
 
@@ -84,11 +90,6 @@ lib_train = np.load('data/Binary_Train.npz') # load dataset
 X_3D, Y = lib_train['X'], lib_train['Y']
 X = X_3D.reshape((X_3D.shape[0], -1)).T
 
-# ------------------------------------------ #
-print(f'The shape of X_3D is -> {X_3D.shape}')
-print(f'The shape of Y is -> {Y.shape}')
-print(f'The shape of X is -> {X.shape}')
-# ------------------------------------------ #
 
 np.random.seed(0)
 neuron = Neuron(X.shape[0])

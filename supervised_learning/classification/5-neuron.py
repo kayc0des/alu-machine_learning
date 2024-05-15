@@ -68,9 +68,9 @@ class Neuron(object):
         ''' Calculates one pass of gradient descent '''
         # Evaluate the partial derivatives of the cost function
         dz = A - Y
-        dw = np.matmul(X.T, dz)
+        dw = np.dot(X, dz.T)
         db = dz
         # update the private attributes __W and __b
         self.__W = self.__W - (alpha * dw)
-        self.__b = self.__W - (alpha * db)
+        self.__b = self.__b - (alpha * db)
         return self.__W, self.__b

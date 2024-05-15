@@ -62,6 +62,19 @@ class Neuron(object):
         A = np.where(A_hat > 0.5, 1, 0)
         cost = self.cost(Y, A_hat)
         return A, cost
+    
+    def gradient_descent(self, X, Y, A, alpha=0.5):
+        ''' Calculates one pass of gradient descent '''
+        # Evaluate the partial derivatives of the cost function
+        dz = A - Y
+        print(f'shape of dz -> {dz.T.shape}')
+        print(f'shape of X -> {X.shape}')
+        dw = np.dot(X, dz.T)
+        db = dz
+        # update the private attributes __W and __b
+        self.__W = self.__W - (alpha * dw)
+        self.__b = self.__b - (alpha * db)
+        return self.__W, self.__b
 
 
 ''' Debug '''
@@ -77,9 +90,10 @@ print(f'The shape of X is -> {X.shape}')
 
 np.random.seed(0)
 neuron = Neuron(X.shape[0])
-A, cost = neuron.evaluate(X, Y)
-print(A)
-print(cost)
+A = neuron.forward_prop(X)
+neuron.gradient_descent(X, Y, A, 0.5)
+print(neuron.W)
+print(neuron.b)
 
 
 # test = np.array([[[1, 2, 3],

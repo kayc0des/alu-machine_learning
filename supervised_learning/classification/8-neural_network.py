@@ -16,7 +16,7 @@ class NeuralNetwork(object):
         if not isinstance(nx, int):
             raise TypeError('nx must be an integer')
         if nx < 1:
-            raise ValueError('nodes must be a positive integer')
+            raise ValueError('nx must be a positive integer')
         if not isinstance(nodes, int):
             raise TypeError('nodes must be an integer')
         if nodes < 1:

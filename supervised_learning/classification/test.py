@@ -65,20 +65,19 @@ class Neuron(object):
     
     def gradient_descent(self, X, Y, A, alpha=0.5):
         ''' Calculates one pass of gradient descent '''
-        # Evaluate the partial derivatives of the cost function
-    
-        # Evaluate the partial derivatives of the cost function
         m = Y.shape[1]
-        
-        # Compute the error between predicted activation and true labels
+        # Evaluate the partial derivatives of the cost function
         dz = A - Y
-
-        # Update weights and bias
         dw = np.dot(X, dz.T) / m
         db = np.sum(dz) / m
-        
+
         self.__W -= alpha * dw.T
         self.__b -= alpha * db
+        
+        print(f'__W -> {self.__W.shape}')
+        print(type(self.b))
+        
+        return self.__W, self.__b
 
 
 ''' Debug '''
@@ -86,13 +85,15 @@ lib_train = np.load('data/Binary_Train.npz') # load dataset
 X_3D, Y = lib_train['X'], lib_train['Y']
 X = X_3D.reshape((X_3D.shape[0], -1)).T
 
+print(Y.shape)
 
 np.random.seed(0)
 neuron = Neuron(X.shape[0])
 A = neuron.forward_prop(X)
-neuron.gradient_descent(X, Y, A, 0.5)
-print(neuron.W)
-print(neuron.b)
+print(A.shape)
+# neuron.gradient_descent(X, Y, A, 0.5)
+# print(neuron.W)
+# print(neuron.b)
 
 
 # test = np.array([[[1, 2, 3],

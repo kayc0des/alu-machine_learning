@@ -70,7 +70,7 @@ class Neuron(object):
         # Evaluate the partial derivatives of the cost function
         dz = A - Y
         dw = np.dot(X, dz.T) / m
-        db = np.sum(dz, axis=1) / m
+        db = np.sum(dz) / m
 
         self.__W -= alpha * dw.T
         self.__b -= alpha * db

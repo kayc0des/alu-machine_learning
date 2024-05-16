@@ -9,10 +9,12 @@ class NeuralNetwork(object):
     ''' Neural Network '''
 
     def __init__(self, nx, nodes):
-        ''' Constructor method 
+        '''
+        Constructor method
         Param: nx -> number of inputs
-        nodes -> number of neurons in hidden layer '''
-        
+        nodes -> number of neurons in hidden layer
+        '''
+
         if not isinstance(nx, int):
             raise TypeError('nx must be an integer')
         if nx < 1:

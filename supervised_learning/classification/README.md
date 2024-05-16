@@ -1,5 +1,10 @@
 # Project: Building a Binary Image Classifier from Scratch using NumPy
 
+## Inroduction
+Supervised learning is a type of machine learning where the model learns from labeled data, meaning it is provided with input-output pairs during training. The goal of supervised learning is to learn a mapping from inputs to outputs, so that given new, unseen inputs, the model can accurately predict the corresponding outputs. Supervised learning can be divided into two main categories: classification and regression. For this project we will focus on classification.
+
+- Classification: Classification is a type of supervised learning task where the goal is to predict the category or class label of a given input based on its features. In classification, the output variable is categorical, meaning it takes on discrete values from a predefined set of classes. For example, recognizing handwritten digits as numbers from 0 to 9, in this project we will build a binary image classifier to recognize handwritten digits - 0 and 1.
+
 ## Data Description
 This project utilizes the following datasets stored in the `data` directory:
 

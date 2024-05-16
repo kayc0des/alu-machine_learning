@@ -83,7 +83,7 @@ class NeuralNetwork(object):
 
     def evaluate(self, X, Y):
         ''' Evaluates the networks prediction '''
-        A = self.forward_prop(X)
-        prediction = np.where(A >= 0.5, 1, 0)
-        cost = self.cost(Y, A)
+        A1, A2 = self.forward_prop(X)
+        prediction = np.where(A2 >= 0.5, 1, 0)
+        cost = self.cost(Y, A2)
         return prediction, cost

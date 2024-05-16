@@ -66,9 +66,9 @@ class Neuron(object):
         Evaluates the neuron's prediction
         '''
         A = self.forward_prop(X)
-        binary_ouput = np.where(A >= 0.5, 1, 0)
-        cost = self.cost(Y, binary_ouput)
-        return binary_ouput, cost
+        prediction = np.where(A >= 0.5, 1, 0)
+        cost = self.cost(Y, A)
+        return prediction, cost
 
     def gradient_descent(self, X, Y, A, alpha=0.05):
         '''

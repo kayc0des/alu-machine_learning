@@ -99,19 +99,12 @@ class Neuron(object):
         if alpha > 0 is False:
             raise ValueError('alpha must be positive')
 
-        m = Y.shape[1]
-
         for i in range(iterations):
             # Forward propagation
+            A = self.forward_prop(X)
 
             # gradient descent
-            A = self.forward_prop(X)
-            dz = A - Y
-            dw = (1 / m) * np.dot(X, dz.T)
-            db = (1 / m) * np.sum(dz)
-
-            self.__W = self.__W - (alpha * dw.T)
-            self.__b = self.__b - (alpha * db)
+            self.gradient_descent(X, Y, A, alpha)
 
         # Evaluation of training
         evaluation = self.evaluate(X, Y)

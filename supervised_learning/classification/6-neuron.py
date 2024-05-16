@@ -71,7 +71,7 @@ class Neuron(object):
         return A, cost
 
     def gradient_descent(self, X, Y, A, alpha=0.05):
-        ''' 
+        '''
         Calculates one pass of gradient descent
         '''
         m = Y.shape[1]
@@ -90,13 +90,13 @@ class Neuron(object):
         '''
         Trains the Neuron
         '''
-        if isinstance(iterations, int) is False:
+        if not isinstance(iterations, int):
             raise TypeError('iterations must be an integer')
         if iterations < 1:
             raise ValueError('iterations must be a positive integer')
-        if isinstance(alpha, float) is False:
+        if type(alpha) is not float:
             raise TypeError('alphamust be a float')
-        if alpha > 0 is False:
+        if alpha < 0:
             raise ValueError('alpha must be positive')
 
         for i in range(iterations):

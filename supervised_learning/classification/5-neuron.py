@@ -64,12 +64,12 @@ class Neuron(object):
         cost = self.cost(Y, A_hat)
         return A, cost
 
-    def gradient_descent(self, X, Y, A, alpha=0.5):
+    def gradient_descent(self, X, Y, A, alpha=0.05):
         ''' Calculates one pass of gradient descent '''
         m = Y.shape[1]
         # Evaluate the partial derivatives of the cost function
         dz = A - Y
-        dw = (1 / m) * np.matmul(X, dz.T)
+        dw = (1 / m) * np.dot(X, dz.T)
         db = (1 / m) * np.sum(dz)
 
         self.__W = self.__W - (alpha * dw.T)

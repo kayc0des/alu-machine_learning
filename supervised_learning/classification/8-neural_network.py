@@ -20,11 +20,11 @@ class NeuralNetwork(object):
         if not isinstance(nodes, int):
             raise TypeError('nodes must be an integer')
         if nodes < 1:
-            raise ValueError('nx must be a positive integer')
+            raise ValueError('nodes must be a positive integer')
 
         self.nx = nx
         self.nodes = nodes
-        self.W1 = np.random.randn(nodes, nx)
+        self.W1 = np.random.randn(nodes, self.nx)
         self.b1 = np.zeros((nodes, 1))
         self.A1 = 0
         self.W2 = np.random.randn(1, nodes)

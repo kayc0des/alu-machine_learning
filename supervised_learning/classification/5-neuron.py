@@ -69,10 +69,10 @@ class Neuron(object):
         m = Y.shape[1]
         # Evaluate the partial derivatives of the cost function
         dz = A - Y
-        dw = np.dot(X, dz.T) / m
-        db = np.sum(dz) / m
+        dw = (1 / m) * np.matmul(X, dz.T)
+        db = (1 / m) * np.sum(dz)
 
-        self.__W -= alpha * dw.T
-        self.__b -= alpha * db
+        self.__W = self.__W - (alpha * dw.T)
+        self.__b = self.__b - (alpha * db)
 
         return self.__W, self.__b

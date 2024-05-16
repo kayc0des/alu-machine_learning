@@ -109,4 +109,4 @@ class Neuron(object):
         # Evaluation of training
         evaluation = self.evaluate(X, Y)
 
-        return self.__W, self.__b, evaluation
+        return evaluation

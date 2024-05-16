@@ -2,7 +2,6 @@
 ## Learning Objectives
 At the end of this project, you'll be proficient in:
 
-## General
 - Understanding the concept of a model and its role in machine learning.
 - Grasping the fundamentals of supervised learning and its significance in training models.
 - Defining prediction and its application in making estimations based on trained models.
@@ -26,3 +25,20 @@ At the end of this project, you'll be proficient in:
 - Understanding softmax function and its application in multiclass classification tasks.
 - Understanding cross-entropy loss as a loss function commonly used in classification tasks.
 - Understanding pickling in Python and its role in serializing and deserializing objects.
+
+## Single Neuron Training (Project 0 - 7)
+This project focuses on training a single neuron for binary image classification. The `Neuron` class is implemented to perform forward propagation, cost calculation, gradient descent, and training using a specified number of iterations and learning rate.
+
+### Training Results
+The training process includes monitoring the cost function over iterations and plotting the training cost graphically. Below are the visualizations generated during training and some key stats.
+
+- Train cost: 0.013386353289868338
+- Train accuracy: 99.66837741808132%
+- Dev cost: 0.010803484515167203
+- Dev accuracy: 99.81087470449172%
+
+#### Training Cost
+![Training Cost](img/Neuron_training_cost.png)
+
+#### Predicted Output
+![Predicted Output](img/predicted_output.png)

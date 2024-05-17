@@ -29,29 +29,40 @@ The training process includes monitoring the cost function over iterations and p
 #### Predicted Output
 ![Predicted Output](img/predicted_output.png)
 
-## Learning Objectives
-At the end of this project, you'll be proficient in:
+## Single Hidden Layer Neural Network (Project 8 - 15)
 
-- Understanding the concept of a model and its role in machine learning.
-- Grasping the fundamentals of supervised learning and its significance in training models.
-- Defining prediction and its application in making estimations based on trained models.
-- Recognizing nodes as the basic computational units in neural networks.
-- Understanding the significance of weights and biases in adjusting model behavior.
-- Explaining activation functions and their role in introducing non-linearity into neural networks.
-- Understanding and implementing Sigmoid, Tanh, ReLU, and Softmax activation functions.
-- Understanding the concept of layers in neural networks and their role in hierarchical feature learning.
-- Identifying hidden layers as layers within a neural network that are neither input nor output layers.
-- Understanding Logistic Regression as a linear classifier used for binary classification tasks.
-- Defining loss and cost functions and understanding their role in evaluating model performance.
-- Understanding forward propagation as the process of predicting outputs given inputs in a neural network.
-- Understanding Gradient Descent as an optimization algorithm used for minimizing loss functions.
-- Understanding backpropagation as the process of computing gradients of the loss function with respect to weights and biases.
-- Understanding Computation Graphs as a visual representation of mathematical operations in neural networks.
-- Understanding the importance of initializing weights and biases appropriately in neural networks.
-- Understanding the importance of vectorization in efficiently processing large datasets.
-- Understanding how to split data into training, validation, and test sets for model evaluation.
-- Understanding multiclass classification and its differences from binary classification.
-- Understanding one-hot encoding as a technique used to represent categorical variables.
-- Understanding softmax function and its application in multiclass classification tasks.
-- Understanding cross-entropy loss as a loss function commonly used in classification tasks.
-- Understanding pickling in Python and its role in serializing and deserializing objects.
+## Overview
+This project revolves around implementing a single hidden layer neural network for binary image classification. The neural network architecture comprises an input layer, a hidden layer with configurable nodes, and an output layer with a single neuron. The model's objective is to classify images into one of two classes: positive or negative.
+
+### Class: NeuralNetwork
+The `NeuralNetwork` class is responsible for initializing and training the neural network. Below is a breakdown of its methods and attributes:
+
+### Methods:
+1. `__init__(nx, nodes)`: Constructor method to initialize the neural network with the specified number of input nodes (`nx`) and hidden layer nodes (`nodes`).
+   
+2. `forward_prop(X)`: Performs forward propagation through the neural network to compute the output of the hidden layer (`A1`) and the output layer (`A2`).
+
+3. `cost(Y, A)`: Calculates the cost (or loss) of the neural network based on the predicted output (`A`) and the actual labels (`Y`).
+
+4. `evaluate(X, Y)`: Evaluates the performance of the neural network by computing predictions for input data `X` and comparing them against the actual labels `Y`. Returns the predictions and the corresponding cost.
+
+5. `gradient_descent(X, Y, A1, A2, alpha=0.05)`: Performs one pass of gradient descent to update the weights and biases of the neural network based on the computed gradients.
+
+6. `train(X, Y, iterations=5000, alpha=0.05, verbose=True, graph=True, step=100)`: Trains the neural network using the specified number of iterations and learning rate (`alpha`). It prints the cost at regular intervals if `verbose=True` and plots the training cost if `graph=True`.
+
+### Attributes:
+1. `W1`, `b1`: Weight matrix and bias vector for the hidden layer.
+2. `W2`, `b2`: Weight matrix and bias scalar for the output layer.
+3. `A1`, `A2`: Output activations of the hidden layer and the output layer, respectively.
+
+### Image Data
+The image data used for training and evaluation is stored in numpy arrays. The shape of the image data is `(784, 12665)`, where each column represents a flattened image of size 784 pixels. The corresponding labels are binary, with a shape of `(1, 12665)`.
+
+### Training
+The training process involves iteratively updating the neural network's parameters (weights and biases) using gradient descent. The cost function is minimized over the specified number of iterations to improve the model's classification accuracy.
+
+### Key Stats
+- Train cost: 0.024369225667283875
+- Train accuracy: 99.3999210422424%
+- Dev cost: 0.020330639788072764
+- Dev accuracy: 99.57446808510639%

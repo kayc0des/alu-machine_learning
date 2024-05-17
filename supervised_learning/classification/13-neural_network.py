@@ -94,11 +94,11 @@ class NeuralNetwork(object):
 
         # Gradient descent -> output layer
         dz2 = A2 - Y
-        dw2 = (1 / m) * np.dot(A1, dz2.T)
+        dw2 = (1 / m) * np.matmul(dz2, A1.T)
         db2 = (1 / m) * np.sum(dz2, axis=1, keepdims=True)
 
         # Update weights and bias of the output layer
-        self.__W2 = self.__W2 - (alpha * dw2.T)
+        self.__W2 = self.__W2 - (alpha * dw2)
         self.__b2 = self.__b2 - (alpha * db2)
 
         # Backpropagate the error to compute gradients -> hidden layer

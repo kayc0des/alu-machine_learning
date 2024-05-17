@@ -87,7 +87,7 @@ class NeuralNetwork(object):
         prediction = np.where(A2 >= 0.5, 1, 0)
         cost = self.cost(Y, A2)
         return prediction, cost
-    
+
     def gradient_descent(self, X, Y, A1, A2, alpha=0.05):
         ''' One pass of gradient descent '''
         m = Y.shape[1]

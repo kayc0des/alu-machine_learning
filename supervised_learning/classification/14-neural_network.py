@@ -139,7 +139,7 @@ class NeuralNetwork(object):
             A = self.forward_prop(X)
 
             # gradient descent
-            self.gradient_descent(X, Y, A, alpha)
+            self.gradient_descent(X, Y, self.__A1, self.__A2, alpha)
 
         evaluation = self.evaluate(X, Y)
         return evaluation

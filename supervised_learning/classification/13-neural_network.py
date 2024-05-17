@@ -104,10 +104,10 @@ class NeuralNetwork(object):
         # Backpropagate the error to compute gradients for the hidden layer
         dz1 = np.dot(self.__W2.T, dz2) * A1 * (1 - A1)
         dw1 = (1 / m) * np.dot(X, dz1.T)
-        db1 = (1 / m) * np.sum(dz1)
+        db1 = (1 / m) * np.sum(dz1, axis=1, keepdims=True)
 
         # Update weights and bias of the hidden layer
         self.__W1 = self.__W1 - (alpha * dw1.T)
         self.__b1 = self.__b1 - (alpha * db1)
 
-        return self.__W2, self.__W1, self.__b1, self.__b2
+        return self.__W1, self.__b1, self.__W2, self.__b2

@@ -95,7 +95,7 @@ class NeuralNetwork(object):
         # Gradient descent for the output layer
         dz2 = A2 - Y
         dw2 = (1 / m) * np.dot(A1, dz2.T)
-        db2 = (1 / m) * np.sum(dz2)
+        db2 = (1 / m) * np.sum(dz2, axis=1, keepdims=True)
 
         # Update weights and bias of the output layer
         self.__W2 = self.__W2 - (alpha * dw2.T)

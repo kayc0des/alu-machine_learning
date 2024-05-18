@@ -118,7 +118,7 @@ class DeepNeuralNetwork(object):
                     cache['W{}'.format(i + 1).T], gd['dz{}'.format(i + 1)]
                 ) * (cache['A{}'.format(i)] * (1 - cache['A{}'.format(i)]))
                 gd['dw{}'.format(i)] = (1 / m) * np.matmul(
-                    gd['dz{}'.format(i)], cache['A{}'.format(i - 1).T]
+                    gd['dz{}'.format(i)], cache['A{}'.format(i - 1)].T
                 )
                 gd['db{}'.format(i)] = (1 / m) * np.sum(
                     gd['dz{}'.format(i)], axis=1, keepdims=True

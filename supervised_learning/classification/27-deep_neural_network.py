@@ -55,32 +55,19 @@ class DeepNeuralNetwork(object):
         return self.__weights
 
     def forward_prop(self, X):
-        ''' Performs forward propagation '''
-
-        # A0 -> X input
-        self.__cache['A0'] = X
-
-        # loop through weights{} to compute A
-        for i in range(1, self.__L + 1):
-            if i == 1:
-                z = np.dot(self.__weights['W{}'.format(i)],
-                           X) + self.__weights['b{}'.format(i)]
-                a = 1 / (1 + np.exp(-z))
+        """foward_prop of nn"""
+        self.cache["A0"] = X
+        for i in range(1, self.L+1):
+            W = self.weights['W'+str(i)]
+            b = self.weights['b'+str(i)]
+            A = self.cache['A'+str(i - 1)]
+            z = np.matmul(W, A) + b
+            if i != self.L:
+                A = 1 / (1 + np.exp(-z))  # sigmoid fxn
             else:
-                z = np.dot(self.__weights['W{}'.format(i)],
-                           self.__cache['A{}'.format(
-                               i - 1)]) + self.__weights['b{}'.format(i)]
-                if i == self.__L:
-                    exp_z = np.exp(z)
-                    a = exp_z / np.sum(exp_z, axis=0, keepdims=True)
-                else:
-                    a = 1 / (1 + np.exp(-z))
-            self.__cache['A{}'.format(i)] = a
-
-        # final output A -> last evaluation of forward prop
-        A = self.__cache['A{}'.format(self.__L)]
-
-        return A, self.__cache
+                A = np.exp(z) / np.sum(np.exp(z), axis=0)
+            self.cache["A"+str(i)] = A
+        return self.cache["A"+str(i)], self.cache
 
     def cost(self, Y, A):
         ''' Calculates the models cost '''
@@ -90,13 +77,12 @@ class DeepNeuralNetwork(object):
         return cost
 
     def evaluate(self, X, Y):
-        ''' Evaluate the neural network's prediction '''
-        A, _ = self.forward_prop(X)
-        prediction = np.argmax(A, axis=0)
-        one_hot_Y = np.argmax(Y, axis=0)
-        accuracy = np.sum(
-            prediction == one_hot_Y) / Y.shape[1] * 100
-        return prediction, accuracy
+        """evaluate"""
+        self.forward_prop(X)
+        A = self.cache.get("A" + str(self.L))
+        prediction = np.eye(A.shape[0])[np.argmax(A, axis=0)].T
+        cost = self.cost(Y, A)
+        return prediction, cost
 
     def gradient_descent(self, Y, cache, alpha=0.05):
         ''' Calculates one pass of gradient descent '''

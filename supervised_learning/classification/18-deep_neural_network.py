@@ -55,6 +55,9 @@ class DeepNeuralNetwork(object):
     def forward_prop(self, X):
         ''' Performs forward propagation '''
 
+        # A0 -> X input
+        self.__cache['A0'] = X
+
         # loop through weights{} to compute A
         for i in range(1, self.__L + 1):
             if i == 1:
@@ -67,8 +70,6 @@ class DeepNeuralNetwork(object):
                 a = 1 / (1 + np.exp(-z))
             self.__cache[f'A{i}'] = a
 
-        # A0 -> X input
-        self.__cache['A0'] = X
         # final output A -> last evaluation of forward prop
         A = self.__cache[f'A{self.__L}']
 

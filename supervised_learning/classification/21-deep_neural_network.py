@@ -93,28 +93,26 @@ class DeepNeuralNetwork(object):
     def gradient_descent(self, Y, cache, alpha=0.05):
         ''' Calculates one pass of gradient descent '''
         m = Y.shape[1]
-        L = self.__L
+        L = self.__L  # number of layers
+        A_L = cache["A{}".format(L)]
+        dZ = A_L - Y
 
         # Compute gradients using backpropagation
         for i in range(L, 0, -1):
-            A_current = cache['A{}'.format(i)]
-            A_prev = cache['A{}'.format(i - 1)] if i > 1 else cache['A0']
-
-            if i == L:
-                dz = A_current - Y
-            else:
-                W_next = self.__weights['W{}'.format(i + 1)]
-                dz_next = cache['dz{}'.format(i + 1)]
-                dz = np.matmul(W_next.T, dz_next) * (A_current * (1 - A_current))
-
-            dw = (1 / m) * np.matmul(dz, A_prev.T)
-            db = (1 / m) * np.sum(dz, axis=1, keepdims=True)
-
+            A = cache["A{}".format(i)]
+            A_prev = cache["A{}".format(i - 1)]
+            W = self.__weights["W{}".format(i)]
+            b = self.__weights["b{}".format(i)]
+            
+            dW = np.matmul(dZ, A_prev.T) / m
+            db = np.sum(dZ, axis=1, keepdims=True) / m
+            
+            # Calculate dZ for the next layer if not the input layer
+            if i > 1:
+                dZ = np.matmul(W.T, dZ) * A_prev * (1 - A_prev)
+            
             # Update weights and biases
-            self.__weights['W{}'.format(i)] -= alpha * dw
-            self.__weights['b{}'.format(i)] -= alpha * db
-
-            # Save dz 4 the next iteration
-            cache['dz{}'.format(i)] = dz
-
+            self.__weights["W{}".format(i)] -= alpha * dW
+            self.__weights["b{}".format(i)] -= alpha * db
+        
         return self.__weights

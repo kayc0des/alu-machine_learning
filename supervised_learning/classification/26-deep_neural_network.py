@@ -140,7 +140,7 @@ class DeepNeuralNetwork(object):
 
             if verbose and i % step == 0:
                 cost = self.cost(Y, A)
-                print(f'Cost after {i} iterations: {cost}')
+                print('Cost after {} iterations: {}'.format(i, cost))
                 costs.append(cost)
 
         evaluation = self.evaluate(X, Y)

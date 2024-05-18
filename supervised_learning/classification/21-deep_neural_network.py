@@ -103,16 +103,16 @@ class DeepNeuralNetwork(object):
             A_prev = cache["A{}".format(i - 1)]
             W = self.__weights["W{}".format(i)]
             b = self.__weights["b{}".format(i)]
-            
+
             dW = np.matmul(dZ, A_prev.T) / m
             db = np.sum(dZ, axis=1, keepdims=True) / m
-            
+
             # Calculate dZ 4 the next layer if not the input layer
             if i > 1:
                 dZ = np.matmul(W.T, dZ) * A_prev * (1 - A_prev)
-            
+
             # Update weights and biases
             self.__weights["W{}".format(i)] -= alpha * dW
             self.__weights["b{}".format(i)] -= alpha * db
-        
+
         return self.__weights

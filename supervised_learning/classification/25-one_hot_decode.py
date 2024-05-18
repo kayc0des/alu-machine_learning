@@ -18,7 +18,7 @@ def one_hot_decode(one_hot):
     one_hot: numpy.ndarray, one-hot encoded matrix with shape (classes, m)
 
     Returns:
-    numpy.ndarray with shape (m, ) 
+    numpy.ndarray with shape (m, )
     containing the numeric labels for each example,
     or None on failure
     """

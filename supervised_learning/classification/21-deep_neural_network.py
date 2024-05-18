@@ -93,30 +93,28 @@ class DeepNeuralNetwork(object):
     def gradient_descent(self, Y, cache, alpha=0.05):
         ''' Calculates one pass of gradient descent '''
         m = Y.shape[1]
+        L = self.__L
 
-        gd = {}
+        # Compute gradients using backpropagation
+        for i in range(L, 0, -1):
+            A_current = cache[f'A{i}']
+            A_prev = cache[f'A{i - 1}'] if i > 1 else cache['A0']
 
-        # Evaluate dz, dw, db (1 -> L)
-        for i in range(self.__L, 0, -1):
-            if i == self.__L:
-                # Output layer
-                gd['dz{}'.format(i)] = cache['A{}'.format(i)] - Y
+            if i == L:
+                dz = A_current - Y
             else:
-                # Hidden layers
-                gd['dz{}'.format(i)] = np.matmul(
-                    self.__weights['W{}'.format(
-                        i + 1)].T, gd['dz{}'.format(i + 1)]
-                ) * (cache['A{}'.format(i)] * (1 - cache['A{}'.format(i)]))
+                W_next = self.__weights[f'W{i + 1}']
+                dz_next = cache[f'dz{i + 1}']
+                dz = np.matmul(W_next.T, dz_next) * (A_current * (1 - A_current))
 
-            gd['dw{}'.format(i)] = (1 / m) * np.matmul(
-                gd['dz{}'.format(i)], cache['A{}'.format(i - 1)].T
-            )
-            gd['db{}'.format(i)] = (1 / m) * np.sum(
-                gd['dz{}'.format(i)], axis=1, keepdims=True
-            )
+            dw = (1 / m) * np.matmul(dz, A_prev.T)
+            db = (1 / m) * np.sum(dz, axis=1, keepdims=True)
 
             # Update weights and biases
-            self.__weights['W{}'.format(i)] -= alpha * gd['dw{}'.format(i)]
-            self.__weights['b{}'.format(i)] -= alpha * gd['db{}'.format(i)]
+            self.__weights[f'W{i}'] -= alpha * dw
+            self.__weights[f'b{i}'] -= alpha * db
+
+            # Save dz for the next iteration
+            cache[f'dz{i}'] = dz
 
         return self.__weights

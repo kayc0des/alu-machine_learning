@@ -66,3 +66,16 @@ The training process involves iteratively updating the neural network's paramete
 - Train accuracy: 99.3999210422424%
 - Dev cost: 0.020330639788072764
 - Dev accuracy: 99.57446808510639%
+
+## Deep Neural Network for Binary Classification (Project 16 - 23)
+
+This project implements a Deep Neural Network (DNN) for binary classification. The network architecture consists of an input layer, multiple hidden layers, and an output layer. The DNN is trained using gradient descent with backpropagation.
+
+### Code
+![Deep Neural Network](23-deep_neural_network.py)
+
+### Key Stats
+- Train cost: 0.011671820326008166
+- Train accuracy: 99.88945913936044%
+- Dev cost: 0.009249552132279246
+- Dev accuracy: 99.95271867612293%

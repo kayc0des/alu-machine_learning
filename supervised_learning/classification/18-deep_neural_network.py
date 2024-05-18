@@ -61,16 +61,16 @@ class DeepNeuralNetwork(object):
         # loop through weights{} to compute A
         for i in range(1, self.__L + 1):
             if i == 1:
-                z = np.dot(self.__weights[f'W{i}'],
-                           X) + self.__weights[f'b{i}']
+                z = np.dot(self.__weights['W{}'.format(i)],
+                           X) + self.__weights['b{}'.format(i)]
                 a = 1 / (1 + np.exp(-z))
             else:
-                z = np.dot(self.__weights[f'W{i}'],
-                           self.__cache[f'A{i - 1}']) + self.__weights[f'b{i}']
+                z = np.dot(self.__weights['W{}'.format(i)],
+                           self.__cache[f'A{i - 1}']) + self.__weights['b{}'.format(i)]
                 a = 1 / (1 + np.exp(-z))
-            self.__cache[f'A{i}'] = a
+            self.__cache['A{}'.format(i)] = a
 
         # final output A -> last evaluation of forward prop
-        A = self.__cache[f'A{self.__L}']
+        A = self.__cache['A{}'.format(self.__L)]
 
         return A, self.__cache

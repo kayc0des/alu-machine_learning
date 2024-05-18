@@ -125,13 +125,13 @@ class DeepNeuralNetwork(object):
                 )
                 # update __weights hidden layer 1
                 self.__weights['W{}'.format(i)] -= (
-                    alpha * gd['dz{}'.format(i)])
+                    alpha * gd['dw{}'.format(i)])
                 self.__weights['b{}'.format(i)] -= (
                     alpha * gd['db{}'.format(i)])
 
             else:
                 gd['dz{}'.format(i)] = np.matmul(
-                    cache['W{}'.format(i + 1).T], gd['dz{}'.format(i + 1)]
+                    cache['W{}'.format(i + 1)].T, gd['dz{}'.format(i + 1)]
                 ) * (cache['A{}'.format(i)] * (1 - cache['A{}'.format(i)]))
                 gd['dw{}'.format(i)] = (1 / m) * np.matmul(
                     gd['dz{}'.format(i)], cache['A{}'.format(i - 1)]
@@ -141,7 +141,7 @@ class DeepNeuralNetwork(object):
                 )
                 # update __weights hidden layer 2
                 self.__weights['W{}'.format(i)] -= (
-                    alpha * gd['dz{}'.format(i)])
+                    alpha * gd['dw{}'.format(i)])
                 self.__weights['b{}'.format(i)] -= (
                     alpha * gd['db{}'.format(i)])
             i -= 1

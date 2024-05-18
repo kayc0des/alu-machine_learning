@@ -109,7 +109,7 @@ class DeepNeuralNetwork(object):
                 )
                 # update __weights dictionary
                 self.__weights['W{}'.format(i)] -= (
-                    alpha * gd['dz{}'.format(i)])
+                    alpha) * (gd['dz{}'.format(i)])
                 self.__weights['b{}'.format(i)] -= (
                     alpha * gd['db{}'.format(i)])
 

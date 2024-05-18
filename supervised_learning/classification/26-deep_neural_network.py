@@ -119,7 +119,7 @@ class DeepNeuralNetwork(object):
 
         return self.__weights
 
-    def train(self, X, Y, iterations=5000, 
+    def train(self, X, Y, iterations=5000,
               alpha=0.05, verbose=True, graph=True, step=100):
         '''
         Trains the neural network

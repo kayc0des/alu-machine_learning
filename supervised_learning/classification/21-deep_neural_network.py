@@ -107,7 +107,7 @@ class DeepNeuralNetwork(object):
             dW = np.matmul(dZ, A_prev.T) / m
             db = np.sum(dZ, axis=1, keepdims=True) / m
             
-            # Calculate dZ for the next layer if not the input layer
+            # Calculate dZ 4 the next layer if not the input layer
             if i > 1:
                 dZ = np.matmul(W.T, dZ) * A_prev * (1 - A_prev)
             

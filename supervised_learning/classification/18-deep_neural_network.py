@@ -66,7 +66,7 @@ class DeepNeuralNetwork(object):
                 a = 1 / (1 + np.exp(-z))
             else:
                 z = np.dot(self.__weights['W{}'.format(i)],
-                           self.__cache[f'A{i - 1}']) + self.__weights['b{}'.format(i)]
+                           self.__cache['A{}'.format(i - 1)]) + self.__weights['b{}'.format(i)]
                 a = 1 / (1 + np.exp(-z))
             self.__cache['A{}'.format(i)] = a
 

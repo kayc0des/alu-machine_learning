@@ -114,7 +114,7 @@ class DeepNeuralNetwork(object):
             self.__weights[f'W{i}'] -= alpha * dw
             self.__weights[f'b{i}'] -= alpha * db
 
-            # Save dz for the next iteration
+            # Save dz 4 the next iteration
             cache[f'dz{i}'] = dz
 
         return self.__weights

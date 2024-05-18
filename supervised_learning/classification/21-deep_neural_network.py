@@ -104,7 +104,8 @@ class DeepNeuralNetwork(object):
             else:
                 # Hidden layers
                 gd['dz{}'.format(i)] = np.matmul(
-                    self.__weights['W{}'.format(i + 1)].T, gd['dz{}'.format(i + 1)]
+                    self.__weights['W{}'.format(
+                        i + 1)].T, gd['dz{}'.format(i + 1)]
                 ) * (cache['A{}'.format(i)] * (1 - cache['A{}'.format(i)]))
 
             gd['dw{}'.format(i)] = (1 / m) * np.matmul(

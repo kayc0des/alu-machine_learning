@@ -71,6 +71,8 @@ The training process involves iteratively updating the neural network's paramete
 
 This project implements a Deep Neural Network (DNN) for binary classification. The network architecture consists of an input layer, multiple hidden layers, and an output layer. The DNN is trained using gradient descent with backpropagation.
 
+![Network](img/DeepNeuralNetwork.drawio.png)
+
 ### Code
 -> [`Deep Neural Network`](23-deep_neural_network.py)
 

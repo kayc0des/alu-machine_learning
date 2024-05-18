@@ -96,54 +96,26 @@ class DeepNeuralNetwork(object):
 
         gd = {}
 
-        # Evaluate dz, dw, db (1 -> 3)
-        i = self.__L
-        while i > 0:
+        # Evaluate dz, dw, db (1 -> L)
+        for i in range(self.__L, 0, -1):
             if i == self.__L:
+                # Output layer
                 gd['dz{}'.format(i)] = cache['A{}'.format(i)] - Y
-                gd['dw{}'.format(i)] = (1 / m) * np.matmul(
-                    gd['dz{}'.format(i)], cache['A{}'.format(i - 1)].T
-                )
-                gd['db{}'.format(i)] = (1 / m) * np.sum(
-                    gd['dz{}'.format(i)], axis=1, keepdims=True
-                )
-                # update __weights dictionary
-                self.__weights['W{}'.format(i)] -= (
-                    alpha * gd['dw{}'.format(i)])
-                self.__weights['b{}'.format(i)] -= (
-                    alpha * gd['db{}'.format(i)])
-
-            elif i == 1:
-                gd['dz{}'.format(i)] = np.matmul(
-                    cache['W{}'.format(i + 1).T], gd['dz{}'.format(i + 1)]
-                ) * (cache['A{}'.format(i)] * (1 - cache['A{}'.format(i)]))
-                gd['dw{}'.format(i)] = (1 / m) * np.matmul(
-                    gd['dz{}'.format(i)], cache['A{}'.format(i - 1)].T
-                )
-                gd['db{}'.format(i)] = (1 / m) * np.sum(
-                    gd['dz{}'.format(i)], axis=1, keepdims=True
-                )
-                # update __weights hidden layer 1
-                self.__weights['W{}'.format(i)] -= (
-                    alpha * gd['dw{}'.format(i)])
-                self.__weights['b{}'.format(i)] -= (
-                    alpha * gd['db{}'.format(i)])
-
             else:
+                # Hidden layers
                 gd['dz{}'.format(i)] = np.matmul(
-                    cache['W{}'.format(i + 1)].T, gd['dz{}'.format(i + 1)]
+                    self.__weights['W{}'.format(i + 1)].T, gd['dz{}'.format(i + 1)]
                 ) * (cache['A{}'.format(i)] * (1 - cache['A{}'.format(i)]))
-                gd['dw{}'.format(i)] = (1 / m) * np.matmul(
-                    gd['dz{}'.format(i)], cache['A{}'.format(i - 1)]
-                )
-                gd['db{}'.format(i)] = (1 / m) * np.sum(
-                    gd['dz{}'.format(i)], axis=1, keepdims=True
-                )
-                # update __weights hidden layer 2
-                self.__weights['W{}'.format(i)] -= (
-                    alpha * gd['dw{}'.format(i)])
-                self.__weights['b{}'.format(i)] -= (
-                    alpha * gd['db{}'.format(i)])
-            i -= 1
+
+            gd['dw{}'.format(i)] = (1 / m) * np.matmul(
+                gd['dz{}'.format(i)], cache['A{}'.format(i - 1)].T
+            )
+            gd['db{}'.format(i)] = (1 / m) * np.sum(
+                gd['dz{}'.format(i)], axis=1, keepdims=True
+            )
+
+            # Update weights and biases
+            self.__weights['W{}'.format(i)] -= alpha * gd['dw{}'.format(i)]
+            self.__weights['b{}'.format(i)] -= alpha * gd['db{}'.format(i)]
 
         return self.__weights

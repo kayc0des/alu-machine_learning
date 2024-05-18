@@ -39,14 +39,17 @@ class DeepNeuralNetwork(object):
 
     @property
     def L(self):
+        ''' Return L '''
         return self.__L
 
     @property
     def cache(self):
+        ''' Return cache '''
         return self.__cache
 
     @property
     def weights(self):
+        ''' Return weights'''
         return self.__weights
 
     def forward_prop(self, X):
@@ -55,10 +58,12 @@ class DeepNeuralNetwork(object):
         # loop through weights{} to compute A
         for i in range(1, self.__L + 1):
             if i == 1:
-                z = np.dot(self.__weights[f'W{i}'], X) + self.__weights[f'b{i}']
+                z = np.dot(self.__weights[f'W{i}'],
+                           X) + self.__weights[f'b{i}']
                 a = 1 / (1 + np.exp(-z))
             else:
-                z = np.dot(self.__weights[f'W{i}'], self.__cache[f'A{i - 1}']) + self.__weights[f'b{i}']
+                z = np.dot(self.__weights[f'W{i}'],
+                           self.__cache[f'A{i - 1}']) + self.__weights[f'b{i}']
                 a = 1 / (1 + np.exp(-z))
             self.__cache[f'A{i}'] = a
 

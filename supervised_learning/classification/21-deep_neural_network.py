@@ -97,24 +97,24 @@ class DeepNeuralNetwork(object):
 
         # Compute gradients using backpropagation
         for i in range(L, 0, -1):
-            A_current = cache[f'A{i}']
-            A_prev = cache[f'A{i - 1}'] if i > 1 else cache['A0']
+            A_current = cache['A{}'.format(i)]
+            A_prev = cache['A{}'.format(i - 1)] if i > 1 else cache['A0']
 
             if i == L:
                 dz = A_current - Y
             else:
-                W_next = self.__weights[f'W{i + 1}']
-                dz_next = cache[f'dz{i + 1}']
+                W_next = self.__weights['W{}'.format(i + 1)]
+                dz_next = cache['dz{}'.format(i + 1)]
                 dz = np.matmul(W_next.T, dz_next) * (A_current * (1 - A_current))
 
             dw = (1 / m) * np.matmul(dz, A_prev.T)
             db = (1 / m) * np.sum(dz, axis=1, keepdims=True)
 
             # Update weights and biases
-            self.__weights[f'W{i}'] -= alpha * dw
-            self.__weights[f'b{i}'] -= alpha * db
+            self.__weights['W{}'.format(i)] -= alpha * dw
+            self.__weights['b{}'.format(i)] -= alpha * db
 
             # Save dz 4 the next iteration
-            cache[f'dz{i}'] = dz
+            cache['dz{}'.format(i)] = dz
 
         return self.__weights

@@ -1,28 +1,23 @@
 #!/usr/bin/env python3
-''' Creates a placeholder '''
+''' Creating placeholders '''
 
 
 import tensorflow as tf
 
 
-def create_layer(prev, n, activation):
+def create_placeholders(nx, classes):
     """
-    Creates a layer in a neural network
+    Creates placeholders for input data and one-hot labels
 
     Parameters:
-    prev -- the tensor output of the previous layer
-    n -- the number of nodes in the layer to create
-    activation -- the activation function that the layer should use
+    nx -- the number of feature columns in our data
+    classes -- the number of classes in our classifier
 
     Returns:
-    the tensor output of the layer
+    x -- placeholder for the input data to the neural network
+    y -- placeholder for the one-hot labels for the input data
     """
-    # Define the initializer using He et. al initialization
-    initializer = tf.contrib.layers.variance_scaling_initializer(mode="FAN_AVG")
-
-    # Create the layer with the specified number of nodes and activation function
-    layer = tf.layers.dense(inputs=prev, units=n, activation=activation,
-                            kernel_initializer=initializer, name='layer')
-
-    return layer
+    x = tf.placeholder(tf.float32, shape=[None, nx], name='x')
+    y = tf.placeholder(tf.float32, shape=[None, classes], name='y')
+    return x, y
 

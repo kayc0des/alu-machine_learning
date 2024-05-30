@@ -1,0 +1,3 @@
+# Regularization 
+
+### What is regularization?

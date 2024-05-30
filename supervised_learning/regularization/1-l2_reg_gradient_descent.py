@@ -31,14 +31,14 @@ def l2_reg_gradient_descent(Y, weights, cache, alpha, lambtha, L):
         if i == L:
             temp_dict['dZ' + str(i)] = cache['A' + str(i)] - Y
             temp_dict['dW' + str(i)] = (( 1 / m) * np.matmul(temp_dict['dZ' + str(i)], cache['A' + str(i -1)].T)) + (lambtha / m) * weights['W' + str(i)]
-            temp_dict['dB' + str(i)] = (1 / m) * np.sum(temp_dict['dZ' + str(i)], axis=1)
+            temp_dict['dB' + str(i)] = (1 / m) * np.sum(temp_dict['dZ' + str(i)], axis=1, keepdims=True)
         else:
             temp_dict['dA' + str(i)] = np.matmul(weights['W' + str(i + 1)].T, temp_dict['dZ' + str(i + 1)])
             value = 1 - np.square(cache['A' + str(i)])
             temp_dict['dZ' + str(i)] = temp_dict['dA' + str(i)] * value
             temp_dict['dW' + str(i)] = (( 1 / m) * np.matmul(
                 temp_dict['dZ' + str(i)], cache['A' + str(i - 1)].T)) + (lambtha / m) * weights['W' + str(i)]
-            temp_dict['dB' + str(i)] = (1 / m) * np.sum(temp_dict['dZ' + str(i)], axis=1)
+            temp_dict['dB' + str(i)] = (1 / m) * np.sum(temp_dict['dZ' + str(i)], axis=1, keepdims=True)
 
         # update weights and biases
         weights['W' + str(i)] -= alpha * temp_dict['dW' + str(i)]

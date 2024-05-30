@@ -23,7 +23,7 @@ def l2_reg_cost(cost, lambtha, weights, L, m):
 
     frobenius_norm = 0
     for i in range(L):
-        val = np.dot(weights['W' + str(i)], weights['W' + str(i)])
+        val = np.dot(weights['W' + str(i + 1)], weights['W' + str(i + 1)].T)
         val = np.sum(val)
         frobenius_norm += val
 
@@ -31,4 +31,3 @@ def l2_reg_cost(cost, lambtha, weights, L, m):
     l2_loss = cost + penalty_term
 
     return l2_loss
-

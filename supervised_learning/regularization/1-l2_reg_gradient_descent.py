@@ -41,7 +41,7 @@ def l2_reg_gradient_descent(Y, weights, cache, alpha, lambtha, L):
             temp_dict['dB' + str(i)] = (1 / m) * np.sum(temp_dict['dZ' + str(i)])
 
         # update weights and biases
-        weights['W' + str(i)] -= alpha * temp_dict['dZ' + str(i)]
+        weights['W' + str(i)] -= alpha * temp_dict['dW' + str(i)]
         weights['b' + str(i)] -= alpha * temp_dict['dB' + str(i)]
 
     return weights

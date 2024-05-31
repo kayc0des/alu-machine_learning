@@ -31,7 +31,7 @@ def l2_reg_gradient_descent(Y, weights, cache, alpha, lambtha, L):
         current_a = cache['A' + str(i)]
         prev_a = cache['A' + str(i - 1)]
 
-        if i == L
+        if i == L:
             # gradient of loss w.r.t output layer
             grad_cache['dZ' + str(i)] = current_a - Y
         else:

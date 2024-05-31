@@ -24,27 +24,14 @@ def l2_reg_gradient_descent(Y, weights, cache, alpha, lambtha, L):
     '''
 
     m = Y.shape[1]
-
-    gradients = {}
-
-    for i in reversed(range(1, L + 1)):
-        A_current = cache['A' + str(i)]
-        A_previous = cache['A' + str(i - 1)]
-
-        if i == L:
-            dZ = A_current - Y
-        else:
-            dA = np.matmul(
-                weights['W' + str(i + 1)].T, gradients['dZ' + str(i + 1)])
-            dZ = dA * (1 - np.square(A_current))
-
-        gradients['dZ' + str(i)] = dZ
-        gradients['dW' + str(i)] = (1 / m) * np.matmul(
-            dZ, A_previous.T) + (lambtha / m) * weights['W' + str(i)]
-        gradients['db' + str(i)] = (1 / m) * np.sum(dZ, axis=1, keepdims=True)
-
-        # Update weights and biases
-        weights['W' + str(i)] -= alpha * gradients['dW' + str(i)]
-        weights['b' + str(i)] -= alpha * gradients['db' + str(i)]
+    dz = cache['A' + str(L)] - Y
+    for i in range(L, 0, -1):
+        A = cache['A' + str(i - 1)]
+        W = weights['W' + str(i)]
+        dw = (1 / m) * np.matmul(dz, A.T) + (lambtha / m) * W
+        db = (1 / m) * np.sum(dz, axis=1, keepdims=True)
+        dz = np.matmul(W.T, dz) * (1 - np.square(A))
+        weights['W' + str(i)] = weights['W' + str(i)] - alpha * dw
+        weights['b' + str(i)] = weights['b' + str(i)] - alpha * db
 
     return weights

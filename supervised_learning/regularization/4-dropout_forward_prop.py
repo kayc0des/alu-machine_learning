@@ -28,12 +28,12 @@ def dropout_forward_prop(X, weights, L, keep_prob):
     for i in range(1, L + 1):
         if i == 1:
             z = np.matmul(
-                X.T, weights['W' + str(i)].T) + weights['b' + str(i)]
+                weights['W' + str(i)], X) + weights['b' + str(i)]
         else:
             layer_input = cache['A' + str(i-1)]
             z = np.matmul(
-                layer_input,
-                weights['W' + str(i)]) + weights['b' + str(i)]
+                weights['W' + str(i)],
+                layer_input) + weights['b' + str(i)]
 
         if i == L:
             A = np.exp(z) / np.sum(np.exp(z), axis=0)

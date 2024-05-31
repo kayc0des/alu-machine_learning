@@ -29,13 +29,13 @@ def l2_reg_gradient_descent(Y, weights, cache, alpha, lambtha, L):
 
     for i in reversed(range(1, L + 1)):
         A_current = cache['A' + str(i)]
-        A_previous = cache['A' + str(i - 1)] if i > 1 else cache['A0']
+        A_previous = cache['A' + str(i - 1)]
 
         if i == L:
             dZ = A_current - Y
         else:
-            dA = np.matmul(weights
-                        ['W' + str(i + 1)].T, gradients['dZ' + str(i + 1)])
+            dA = np.matmul(
+                weights['W' + str(i + 1)].T, gradients['dZ' + str(i + 1)])
             dZ = dA * (1 - np.square(A_current))
 
         gradients['dZ' + str(i)] = dZ

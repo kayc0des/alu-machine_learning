@@ -23,7 +23,7 @@ def dropout_create_layer(prev, n, activation, keep_prob):
     initializer = tf.contrib.layers.variance_scaling_initializer(
         mode="FAN_AVG")
 
-    layer = tf.layer.Dense(
+    layer = tf.layers.Dense(
         units=n,
         activation=activation,
         kernel_initializer=initializer)

@@ -7,11 +7,10 @@ Gradient descent with drop out
 import numpy as np
 
 
-def dropout_gradient_descent(
-    Y, weights, cache, alpha, keep_prob, L):
+def dropout_gradient_descent(Y, weights, cache, alpha, keep_prob, L):
     '''
     Updates weights of a neural network with dropout
-    
+
     Param:
     Y -> one how array with shape (classes, m)
     weights -> dict of the weights and biases
@@ -19,7 +18,7 @@ def dropout_gradient_descent(
     alpha -> learning rate
     keep_prop -> propbability a node will be kept
     L -> number of layers
-    
+
     Returns:
     Weights of the network updated
     '''

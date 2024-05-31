@@ -32,19 +32,19 @@ def l2_reg_gradient_descent(Y, weights, cache, alpha, lambtha, L):
         A_previous = cache['A' + str(i - 1)]
 
         if i == L:
-            dZ = A_current - Y
+            gradients['dZ' + str(i)] = A_current - Y
         else:
             dA = np.matmul(
                 weights['W' + str(i + 1)].T, gradients['dZ' + str(i + 1)])
-            dZ = dA * (1 - np.square(A_current))
+            gradients['dZ' + str(i)] = dA * (1 - np.square(A_current))
 
-        gradients['dZ' + str(i)] = dZ
-        gradients['dW' + str(i)] = (1 / m) * np.matmul(
+        dZ = gradients['dZ' + str(i)]
+        dW = (1 / m) * np.matmul(
             dZ, A_previous.T) + (lambtha / m) * weights['W' + str(i)]
-        gradients['db' + str(i)] = (1 / m) * np.sum(dZ, axis=1, keepdims=True)
+        db = (1 / m) * np.sum(dZ, axis=1, keepdims=True)
 
         # Update weights and biases
-        weights['W' + str(i)] -= alpha * gradients['dW' + str(i)]
-        weights['b' + str(i)] -= alpha * gradients['db' + str(i)]
+        weights['W' + str(i)] -= alpha * dW
+        weights['b' + str(i)] -= alpha * db
 
     return weights

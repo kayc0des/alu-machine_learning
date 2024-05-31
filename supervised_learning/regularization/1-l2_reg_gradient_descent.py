@@ -27,7 +27,7 @@ def l2_reg_gradient_descent(Y, weights, cache, alpha, lambtha, L):
 
     gradients = {}
 
-    for i in reversed(range(1, L + 1)):
+    for i in range(L + 1, 1, -1):
         A_current = cache['A' + str(i)]
         A_previous = cache['A' + str(i - 1)]
 

@@ -16,7 +16,7 @@ def dropout_forward_prop(X, weights, L, keep_prob):
     weights -> dict of weights
     L -> number of layers in the network
     keep_prob -> probability that a node will be kept
-    
+
     Returns:
     Dict with outputs of each layer and dropout mask
     '''
@@ -25,13 +25,14 @@ def dropout_forward_prop(X, weights, L, keep_prob):
     cache['A0'] = X
 
     # evaluate forward prop per layer
-    for i in range(len(L + 1)):
+    for i in range(L + 1):
         if i == 1:
             z = np.matmul(
                 X.T, weights['W' + str(i)]) + weights['b' + str(i)]
         else:
             z = np.matmul(
-                cache['A' + str(i - 1)], weights['W' + str(i)]) + weights['b' + str(i)]
+                cache['A' + str(
+                    i - 1)], weights['W' + str(i)]) + weights['b' + str(i)]
 
         if i == L:
             A = np.exp(z) / np.sum(np.exp(z), axis=0)

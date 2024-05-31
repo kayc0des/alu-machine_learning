@@ -31,7 +31,7 @@ def dropout_forward_prop(X, weights, L, keep_prob):
                 X.T, weights['W' + str(i)]) + weights['b' + str(i)]
         else:
             z = np.matmul(
-                cache['A' + str(i - 1)],
+                cache['A{}'.format(i - 1)],
                 weights['W' + str(i)]) + weights['b' + str(i)]
 
         if i == L:

@@ -19,8 +19,8 @@ def l2_reg_gradient_descent(Y, weights, cache, alpha, lambtha, L):
     L -> number of layers in the network
     activation -> output: softmax, hidden: tanh
 
-    Returns:
-    Updated weights and biases
+    Expect:
+    Update weights and biases in place
     '''
 
     m = Y.shape[1]
@@ -49,5 +49,3 @@ def l2_reg_gradient_descent(Y, weights, cache, alpha, lambtha, L):
         # update weights and biases
         weights['W' + str(i)] -= alpha * dW
         weights['b' + str(i)] -= alpha * dB
-
-    return weights

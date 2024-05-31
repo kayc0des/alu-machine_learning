@@ -25,23 +25,25 @@ def l2_reg_gradient_descent(Y, weights, cache, alpha, lambtha, L):
 
     m = Y.shape[1]
 
-    temp_dict = {}
+    grad_cache = {}
 
     for i in reversed(range(1, L+1)):
+        current_a = cache['A' + str(i)]
+        prev_a = cache['A' + str(i - 1)]
+
         if i == L:
-            temp_dict['dZ' + str(i)] = cache['A' + str(i)] - Y
-            temp_dict['dW' + str(i)] = (( 1 / m) * np.matmul(temp_dict['dZ' + str(i)], cache['A' + str(i -1)].T)) + (lambtha / m) * weights['W' + str(i)]
-            temp_dict['dB' + str(i)] = (1 / m) * np.sum(temp_dict['dZ' + str(i)], axis=1, keepdims=True)
+            grad_cache['dZ' + str(i)] = current_a - Y
         else:
-            temp_dict['dA' + str(i)] = np.matmul(weights['W' + str(i + 1)].T, temp_dict['dZ' + str(i + 1)])
-            value = 1 - np.square(cache['A' + str(i)])
-            temp_dict['dZ' + str(i)] = temp_dict['dA' + str(i)] * value
-            temp_dict['dW' + str(i)] = (( 1 / m) * np.matmul(
-                temp_dict['dZ' + str(i)], cache['A' + str(i - 1)].T)) + (lambtha / m) * weights['W' + str(i)]
-            temp_dict['dB' + str(i)] = (1 / m) * np.sum(temp_dict['dZ' + str(i)], axis=1, keepdims=True)
+            grad_cache['dA' + str(i)] = np.matmul(weights['W' + str(i + 1)].T, grad_cache['dZ' + str(i + 1)])
+            val = 1 - np.square(current_a)
+            grad_cache['dZ' + str(i) = grad_cache['dA' + str(i)] * val
+        
+        layer_output_grad = grad_cache['dZ' + str(i)]
+        dW = (np.matmul(layer_output_grad, prev_a.T)) / m + ((lambtha / m) * weights['W' + str(i)])
+        dB = (1 / m) * np.sum(layer_output_grad, axis=1, keepdims=True)
 
         # update weights and biases
-        weights['W' + str(i)] -= alpha * temp_dict['dW' + str(i)]
-        weights['b' + str(i)] -= alpha * temp_dict['dB' + str(i)]
+        weights['W' + str(i)] -= alpha * dW
+        weights['b' + str(i)} -= alpha * dB
 
     return weights

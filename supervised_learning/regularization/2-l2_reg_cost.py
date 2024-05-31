@@ -2,7 +2,6 @@
 ''' Calculates the cost with l2 reg '''
 
 
-import numpy as np
 import tensorflow as tf
 
 

@@ -36,7 +36,7 @@ def l2_reg_gradient_descent(Y, weights, cache, alpha, lambtha, L):
         else:
             dA = np.matmul(weights
                            ['W' + str(i + 1)].T, gradients['dZ' + str(i + 1)])
-            dZ = dA * (1 - np.square(A_current))
+            dZ = dA * (1 - (A_current * A_current))
 
         gradients['dZ' + str(i)] = dZ
         gradients['dW' + str(i)] = (1 / m) * np.matmul(

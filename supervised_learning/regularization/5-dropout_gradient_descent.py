@@ -23,10 +23,25 @@ def dropout_gradient_descent(
     Returns:
     Weights of the network updated
     '''
-    
-    m = Y.sahpe[1]
-    
-    for i in reversed(range(1, L + 1)):
-        # do some
-        print('do some')
+    m = Y.shape[1]
+    dZ = cache['A' + str(L)] - Y
 
+    for i in reversed(range(1, L + 1)):
+        A_prev = cache['A' + str(i - 1)]
+        W = weights['W' + str(i)]
+        b = weights['b' + str(i)]
+
+        dW = np.dot(dZ, A_prev.T) / m
+        db = np.sum(dZ, axis=1, keepdims=True) / m
+
+        if i > 1:
+            dA_prev = np.dot(W.T, dZ)
+            D = cache['D' + str(i - 1)]
+            dA_prev *= D  # Apply dropout mask
+            dA_prev /= keep_prob  # Scale the activation back up
+            dZ = dA_prev * (1 - np.power(A_prev, 2))  # Derivative of tanh
+
+        weights['W' + str(i)] -= alpha * dW
+        weights['b' + str(i)] -= alpha * db
+
+    return weights

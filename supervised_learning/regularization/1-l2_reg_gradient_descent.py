@@ -36,7 +36,7 @@ def l2_reg_gradient_descent(Y, weights, cache, alpha, lambtha, L):
         else:
             grad_cache['dA' + str(i)] = np.matmul(weights['W' + str(i + 1)].T, grad_cache['dZ' + str(i + 1)])
             val = 1 - np.square(current_a)
-            grad_cache['dZ' + str(i) = grad_cache['dA' + str(i)] * val
+            grad_cache['dZ' + str(i)] = grad_cache['dA' + str(i)] * val
         
         layer_output_grad = grad_cache['dZ' + str(i)]
         dW = (np.matmul(layer_output_grad, prev_a.T)) / m + ((lambtha / m) * weights['W' + str(i)])
@@ -44,6 +44,6 @@ def l2_reg_gradient_descent(Y, weights, cache, alpha, lambtha, L):
 
         # update weights and biases
         weights['W' + str(i)] -= alpha * dW
-        weights['b' + str(i)} -= alpha * dB
+        weights['b' + str(i)] -= alpha * dB
 
     return weights

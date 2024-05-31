@@ -44,7 +44,7 @@ def l2_reg_gradient_descent(Y, weights, cache, alpha, lambtha, L):
         gradients['db' + str(i)] = (1 / m) * np.sum(dZ, axis=1, keepdims=True)
 
         # Update weights and biases
-        weights['W' + str(i)] = weights['W' + str(i)] - (alpha * gradients['dW' + str(i)])
-        weights['b' + str(i)] = weights['W' + str(i)] - (alpha * gradients['db' + str(i)])
+        weights['W' + str(i)] -= alpha * gradients['dW' + str(i)]
+        weights['b' + str(i)] -= alpha * gradients['db' + str(i)]
 
     return weights

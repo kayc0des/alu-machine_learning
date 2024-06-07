@@ -1,53 +1,20 @@
-#!/usr/bin/env python3
-''' Evaluate standardization constants '''
-
-
 import numpy as np
 
+# Define data and labels
+data = np.array([[1, 2], [3, 4], [5, 6], [7, 8]])
+labels = np.array([0, 1, 0, 1])
 
-def normalization_constants(X):
-    '''
-    Calculates the normalization constants
-    of a matrix
+len(data) == data.shape[0]
+print(len(data))
 
-    Args:
-    X -> a numpy.ndarray with shape (m, nx)
-    m -> number of examples
-    nx -> number of features
+# Generate a permutation of indices
+permuted_indices = np.random.permutation(len(data))
 
-    Returns:
-    mean and standard deviation'''
+print(permuted_indices)
 
-    mean = np.mean(X, axis=0)
-    stddev = np.std(X, axis=0)
+# Shuffle data and labels
+shuffled_data = data[permuted_indices]
+shuffled_labels = labels[permuted_indices]
 
-    return mean, stddev
-
-
-def normalize(X, m, s):
-    '''
-    Normalizes a matrix
-
-    Args:
-    X -> np.ndarray of shape (d, nx)
-    m -> np.ndarray containing mean values
-    s -> np.ndarray containing std values
-
-    Returns:
-    Normalized matrix
-    '''
-    return (X - m ) / s
-
-if __name__ == '__main__':
-    np.random.seed(0)
-    a = np.random.normal(0, 2, size=(100, 1))
-    b = np.random.normal(2, 1, size=(100, 1))
-    c = np.random.normal(-3, 10, size=(100, 1))
-    X = np.concatenate((a, b, c), axis=1)
-    m, s = normalization_constants(X)
-    print(X[:10])
-    X = normalize(X, m, s)
-    print(X[:10])
-    m, s = normalization_constants(X)
-    print(m)
-    print(s)
+print(shuffled_data)
+print(shuffled_labels)

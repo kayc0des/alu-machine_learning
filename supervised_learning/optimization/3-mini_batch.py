@@ -25,9 +25,4 @@ def train_mini_batch(X_train, Y_train, X_valid, Y_valid,
     Returns:
     Path to where the model was saved
     '''
-    m = X_train.shape[0]
-    classes = Y_train.shape[1]
-    X_train, Y_train = shuffle_data(X_train, Y_train)
-    X_valid, Y_valid = shuffle_data(X_valid, Y_valid)
-    x = tf.placeholder(tf.float32, shape=(None, 784))
-    y = tf.placeholder(tf.float32, shape=(None, 10))
+    saver = tf.train.import_meta_graph(save_path)

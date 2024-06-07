@@ -16,7 +16,7 @@ def moving_average(data, beta):
     m_avg = []
     v_tetha = 0
     for i in range(1, len(data) + 1):
-        v_tetha =  (beta * v_tetha) + ((1 - beta) * data[i - 1])
+        v_tetha = (beta * v_tetha) + ((1 - beta) * data[i - 1])
         bias = v_tetha / (1 - (beta ** i))
         m_avg.append(bias)
 

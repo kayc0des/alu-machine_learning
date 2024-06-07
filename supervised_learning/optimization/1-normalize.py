@@ -17,4 +17,4 @@ def normalize(X, m, s):
     Returns:
     Normalized matrix
     '''
-    return (X - m ) / s
+    return (X - m) / s

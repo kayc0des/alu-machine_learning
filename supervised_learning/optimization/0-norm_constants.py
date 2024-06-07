@@ -18,8 +18,6 @@ def normalization_constants(X):
     Returns:
     mean and standard deviation'''
 
-    m = X.Shape[0]
-
     mean = np.mean(X, axis=0)
     stddev = np.std(X, axis=0)
 

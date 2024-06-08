@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-''' Creates layer with batch nor, '''
+''' Creates layer with batch norm '''
 
 
 import tensorflow as tf

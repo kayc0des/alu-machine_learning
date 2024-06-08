@@ -11,15 +11,15 @@ def create_batch_norm_layer(prev, n, activation):
     a neural network in tensorflow:
 
     Args:
-    prev is the activated output of the previous layer
-    n is the number of nodes in the layer to be created
-    activation is the activation function that should be used
+    prev -> activated output of the previous layer
+    n -> number of nodes in the layer to be created
+    activation -> the activation function that should be used
     gamma and beta, initialized as vectors of 1 and 0 respectively
 
     Returns:
     Activated output of the layer
     '''
-    
+
     # weight initializer
     init = tf.contrib.layers.variance_scaling_initializer(mode="FAN_AVG")
 

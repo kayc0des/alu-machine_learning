@@ -1,30 +1,6 @@
-#!/usr/bin/env python3
-''' Updates variable using gd momentum '''
-
-
-import numpy as np
 import matplotlib.pyplot as plt
-
-
-def update_variables_momentum(alpha, beta1, var, grad, v):
-    '''
-    Updates a variable using the gradient
-    descent with momentum optimization algorithm
-
-    Args:
-    alpha -> the learning rate
-    beta1 -> the momentum weight
-    var -> numpy.ndarray containing the variable to be updated
-    grad -> numpy.ndarray containing the gradient of var
-    v -> previous first moment of var
-
-    Returns:
-    The updated variable and the new moment
-    '''
-    v = (beta1 * v) + ((1 - beta1) * grad)
-    var = var - (alpha * v)
-
-    return var, v
+import numpy as np
+update_variables_Adam = __import__('9-Adam').update_variables_Adam
 
 def forward_prop(X, W, b):
     Z = np.matmul(X, W) + b
@@ -54,16 +30,18 @@ if __name__ == '__main__':
     np.random.seed(0)
     W = np.random.randn(nx, 1)
     b = 0
-    dW_prev = np.zeros((nx, 1))
-    db_prev = 0
+    dW_prev1 = np.zeros((nx, 1))
+    db_prev1 = 0
+    dW_prev2 = np.zeros((nx, 1))
+    db_prev2 = 0
     for i in range(1000):
         A = forward_prop(X, W, b)
         if not (i % 100):
             cost = calculate_cost(Y, A)
             print('Cost after {} iterations: {}'.format(i, cost))
         dW, db = calculate_grads(Y, A, W, b)
-        W, dW_prev = update_variables_momentum(0.01, 0.9, W, dW, dW_prev)
-        b, db_prev = update_variables_momentum(0.01, 0.9, b, db, db_prev)
+        W, dW_prev1, dW_prev2 = update_variables_Adam(0.001, 0.9, 0.99, 1e-8, W, dW, dW_prev1, dW_prev2, i + 1)
+        b, db_prev1, db_prev2 = update_variables_Adam(0.001, 0.9, 0.99, 1e-8, b, db, db_prev1, db_prev2, i + 1)
     A = forward_prop(X, W, b)
     cost = calculate_cost(Y, A)
     print('Cost after {} iterations: {}'.format(1000, cost))

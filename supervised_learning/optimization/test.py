@@ -41,6 +41,7 @@ if __name__ == '__main__':
             print('Cost after {} iterations: {}'.format(i, cost))
         dW, db = calculate_grads(Y, A, W, b)
         W, dW_prev1, dW_prev2 = update_variables_Adam(0.001, 0.9, 0.99, 1e-8, W, dW, dW_prev1, dW_prev2, i + 1)
+        print()
         b, db_prev1, db_prev2 = update_variables_Adam(0.001, 0.9, 0.99, 1e-8, b, db, db_prev1, db_prev2, i + 1)
     A = forward_prop(X, W, b)
     cost = calculate_cost(Y, A)

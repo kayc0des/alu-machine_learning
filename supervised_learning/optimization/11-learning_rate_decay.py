@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-''' Updates variable using RMSProp optimization '''
+''' Perfoms Learning Rate Decay '''
 
 
 import numpy as np

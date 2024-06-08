@@ -20,4 +20,4 @@ def create_RMSProp_op(loss, alpha, beta2, epsilon):
     '''
 
     return tf.train.RMSPropOptimizer(
-        alpha, beta2, epsilon).minimize(loss)
+        alpha, beta2, epsilon=epsilon).minimize(loss)

@@ -7,7 +7,7 @@ import tensorflow as tf
 
 def create_Adam_op(loss, alpha, beta1, beta2, epsilon):
     '''
-    Creates Training op using GD with momentum
+    Creates Training op using GD with Adam
 
     Args:
     loss -> loss of the network
@@ -20,5 +20,5 @@ def create_Adam_op(loss, alpha, beta1, beta2, epsilon):
     Adam optimization operation
     '''
 
-    return tf.train.MomentumOptimizer(
+    return tf.train.AdamOptimizer(
         alpha, beta1, beta2, epsilon).minimize(loss)

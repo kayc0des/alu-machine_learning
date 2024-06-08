@@ -30,7 +30,7 @@ def batch_norm(Z, gamma, beta, epsilon):
 
     # Normalize Z
     Z_norm = (Z - mean) / np.sqrt(variance + epsilon)
-    
+
     # Apply a different distribution to Z_norm
     Z_tilde = gamma * Z_norm + beta
 

@@ -20,7 +20,10 @@ def learning_rate_decay(alpha, decay_rate, global_step, decay_step):
     Returns:
     The updated value of alpha'''
     
-    if global_step % decay_step == 0:
-        alpha = alpha / (1 + decay_rate)
+    # Calculate the number of times the learning rate should decay
+    decay_steps = global_step // decay_step
+
+    # Update the learning rate using the inverse time decay formula
+    alpha = alpha / (1 + decay_rate * decay_steps)
 
     return alpha

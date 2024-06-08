@@ -19,7 +19,7 @@ def train_mini_batch(X_train, Y_train, X_valid, Y_valid, batch_size=32,
         train_op = tf.get_collection('train_op')[0]
         accuracy = tf.get_collection('accuracy')[0]
         loss = tf.get_collection('loss')[0]
-        size = X_train.shape[0] // batch_size
+        size = X_train.shape[0]
         if X_train.shape[0] % batch_size != 0:
             size += 1
         for i in range(epochs + 1):
@@ -47,4 +47,3 @@ def train_mini_batch(X_train, Y_train, X_valid, Y_valid, batch_size=32,
                         print("\t\tCost: {}".format(cost))
                         print("\t\tAccuracy: {}".format(acc))
         return saver.save(sess, save_path)
-    

@@ -20,13 +20,10 @@ def update_variables_momentum(alpha, beta1, var, grad, v):
     Returns:
     The updated variable and the new moment
     '''
-    m = var.shape[0]
-    v_prev = v
-    updated_var = np.zeros((m, var.shape[1]))
 
-    for i in range(m):
-        v_prev = (beta1 * v_prev) + ((1 - beta1) * grad[i])
-        val = var[i] - (alpha * v_prev)
-        updated_var[i] = val
-        
-    return updated_var, v_prev
+    # Update the momentum
+    v = (beta1 * v) + ((1 - beta1) * grad)
+    # Update the variable
+    var = var - (alpha * v)
+
+    return var, v

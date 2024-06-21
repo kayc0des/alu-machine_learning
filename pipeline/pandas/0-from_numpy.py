@@ -16,10 +16,9 @@ def from_numpy(array):
     Returns:
     DataFrame
     '''
-    header = list('ABCDEFGHIJKLMNOPQRSTUVWXYZ')
-    m = array.shape[1]
-    header = header[0:m]
+    num_columns = array.shape[1]
+    columns = [chr(i) for i in range(65, 65 + num_columns)]
 
-    df = pd.DataFrame(array, columns=header)
+    df = pd.DataFrame(array, columns=columns)
 
     return df

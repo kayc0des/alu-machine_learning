@@ -41,8 +41,8 @@ def availableShips(passengerCount):
         return ship_list
 
     except requests.RequestException as e:
-        print(f"Request error: {e}")
+        print("Request error: {}".format(e))
         return []
     except Exception as err:
-        print(f"An error occurred: {err}")
+        print("An error occurred: {}".format(err))
         return []

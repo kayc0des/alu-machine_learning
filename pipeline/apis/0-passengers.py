@@ -46,7 +46,3 @@ def availableShips(passengerCount):
     except Exception as err:
         print(f"An error occurred: {err}")
         return []
-
-if __name__ == '__main__':
-    ships = availableShips(4)
-    print(ships)

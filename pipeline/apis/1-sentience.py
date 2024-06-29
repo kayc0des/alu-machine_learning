@@ -43,6 +43,3 @@ def sentientPlanets():
         print('An error occured: {}'.format(e))
     except Exception as err:
         print('A general error: {}'.format(err))
-
-planets = sentientPlanets()
-print(planets)

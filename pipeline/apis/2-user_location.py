@@ -19,14 +19,14 @@ def user_loc(url):
     response = requests.get(url)
 
     if response.status_code == 404:
-        print("Not found")
+        print('Not found')
     elif response.status_code == 403:
-        reset_timestamp = int(response.headers["X-Ratelimit-Reset"])
+        reset_timestamp = int(response.headers['X-Ratelimit-Reset'])
         current_timestamp = int(time.time())
-        reset_in_minutes = (reset_timestamp - current_timestamp) // 60
-        print("Reset in {} min".format(reset_in_minutes))
+        X = (reset_timestamp - current_timestamp) // 60
+        print('Reset in {} min'.format(X))
     else:
-        print(response.json()["location"])
+        print(response.json()['location'])
 
 if __name__ == "__main__":
     import sys

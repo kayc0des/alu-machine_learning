@@ -22,7 +22,7 @@ def sentientPlanets():
 
         while url:
             response = requests.get(url)
-            
+
             data = response.json()
             species = data['results']
 

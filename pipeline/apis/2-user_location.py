@@ -1,33 +1,46 @@
 #!/usr/bin/env python3
 '''
-Using GitHub API
-write a script that prints the location
-of a specific user
+Prints the location of a user
 '''
 
 
+import sys
 import requests
 import time
-from datetime import datetime
 
 
-def user_loc(url):
-    '''
-    Prints the location of a specific user
-    '''
+def get_user_location(api_url):
+    """
+    Fetch and print the location of a GitHub user.
 
-    response = requests.get(url)
+    :param api_url: The API URL for the user
+    """
+    try:
+        response = requests.get(api_url)
 
-    if response.status_code == 404:
-        print('Not found')
-    elif response.status_code == 403:
-        reset_timestamp = int(response.headers['X-Ratelimit-Reset'])
-        current_timestamp = int(time.time())
-        X = (reset_timestamp - current_timestamp) // 60
-        print('Reset in {} min'.format(X))
-    else:
-        print(response.json()['location'])
+        if response.status_code == 200:
+            user_data = response.json()
+            location = user_data.get('location')
+            if location:
+                print(location)
+            else:
+                print('Location not available')
+        elif response.status_code == 404:
+            print('Not found')
+        elif response.status_code == 403:
+            reset_time = int(response.headers.get('X-RateLimit-Reset', time.time()))
+            current_time = int(time.time())
+            wait_time = (reset_time - current_time) // 60
+            print(f'Reset in {wait_time} min')
+        else:
+            print(f'Error: {response.status_code}')
+    except requests.RequestException as e:
+        print(f'An error occurred: {e}')
 
-if __name__ == "__main__":
-    import sys
-    user_loc(sys.argv[1])
+if __name__ == '__main__':
+    if len(sys.argv) != 2:
+        print('Usage: ./2-user_location.py <api_url>')
+        sys.exit(1)
+
+    api_url = sys.argv[1]
+    get_user_location(api_url)

@@ -35,10 +35,13 @@ def get_launches_per_rocket():
         rocket_names = {rocket['id']: rocket['name'] for rocket in rockets}
 
         # Prepare a list of tuples (rocket_name, count)
-        rocket_launches = [(rocket_names[rocket_id], count) 
-                           for rocket_id, count in launch_count.items()]
+        rocket_launches = [
+            (rocket_names[rocket_id], count) 
+            for rocket_id, count in launch_count.items()
+            ]
 
-        # Sort by number of launches (descending), then by rocket name (ascending)
+        # Sort by number of launches (descending), 
+        # then by rocket name (ascending)
         rocket_launches.sort(key=lambda x: (-x[1], x[0]))
 
         # Print results
@@ -50,6 +53,7 @@ def get_launches_per_rocket():
             'An error occurred while making an API request: {}'.format(e))
     except Exception as err:
         print('A general error occurred: {}'.format(err))
+
 
 if __name__ == '__main__':
     get_launches_per_rocket()

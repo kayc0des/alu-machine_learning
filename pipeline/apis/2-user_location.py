@@ -33,9 +33,9 @@ def get_user_location(api_url):
             wait_time = (reset_time - current_time) // 60
             print('Reset in {} min'.format(wait_time))
         else:
-            print(f'Error: {response.status_code}')
+            print('Error: {}'.format(response.status_code))
     except requests.RequestException as e:
-        print(f'An error occurred: {e}')
+        print('An error occurred: {}'.format(e))
 
 if __name__ == '__main__':
     if len(sys.argv) != 2:

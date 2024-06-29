@@ -9,6 +9,9 @@ import datetime
 
 
 def get_upcoming_launch():
+    '''
+    Prints upcoming SpaceX launch
+    '''
     url = 'https://api.spacexdata.com/v4/launches/upcoming'
     try:
         response = requests.get(url)

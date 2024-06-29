@@ -36,11 +36,11 @@ def get_launches_per_rocket():
 
         # Prepare a list of tuples (rocket_name, count)
         rocket_launches = [
-            (rocket_names[rocket_id], count) 
+            (rocket_names[rocket_id], count)
             for rocket_id, count in launch_count.items()
             ]
 
-        # Sort by number of launches (descending), 
+        # Sort by number of launches (descending),
         # then by rocket name (ascending)
         rocket_launches.sort(key=lambda x: (-x[1], x[0]))
 

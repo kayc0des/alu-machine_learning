@@ -39,7 +39,7 @@ def get_upcoming_launch():
         launchpad = launchpad_response.json()
         launchpad_name = launchpad['name']
         launchpad_locality = launchpad['locality']
-    
+
         # Use the date_local directly
         date_local = upcoming_launch['date_local']
 

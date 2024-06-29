@@ -28,7 +28,7 @@ def sentientPlanets():
 
             for specie in species:
                 if (specie['designation'] == 'sentient'
-                    or specie['classication'] == 'sentient'):
+                    or specie['classification'] == 'sentient'):
                     homeworld_url = specie['homeworld']
                     if homeworld_url:
                         homeworld_response = requests.get(homeworld_url)

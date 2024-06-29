@@ -31,7 +31,8 @@ def availableShips(passengerCount):
                 if ship['passengers'] == 'n/a':
                     continue
                 try:
-                    if int(ship['passengers'].replace(',', '')) >= passengerCount:
+                    if int(ship['passengers']
+                           .replace(',', '')) >= passengerCount:
                         ship_list.append(ship['name'])
                 except ValueError:
                     continue

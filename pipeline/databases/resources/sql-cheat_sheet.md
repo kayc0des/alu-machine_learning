@@ -229,3 +229,6 @@
   ```sql
   DROP USER 'username'@'host';
   ```
+
+## More
+[SQL Commands Cheat Sheet](SQL-Commands-Cheat-Sheet.pdf)

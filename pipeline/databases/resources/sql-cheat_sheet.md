@@ -174,6 +174,11 @@
   CREATE INDEX index_name ON table_name (column1, column2, ...);
   ```
 
+- **Show Index:** List all created indexes
+  ```sql
+  SHOW INDEXES FROM table_name;
+  ```
+
 - **Drop Index:** Creates an index on a table.
   ```sql
   DROP INDEX index_name ON table_name;

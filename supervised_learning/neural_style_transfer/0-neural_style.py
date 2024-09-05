@@ -62,7 +62,7 @@ class NST:
         self.alpha = alpha
         self.beta = beta
 
-    # Static Method
+    @staticmethod
     def scale_image(image):
         '''
         Rescales an image such that

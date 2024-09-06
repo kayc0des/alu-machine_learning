@@ -129,7 +129,7 @@ class NST:
         for layer in vgg_model.layers:
             if isinstance(layer, tf.keras.layers.MaxPooling2D):
                 modified_layers.append(
-                    tf.keras.layers.AveragePoooling2D(
+                    tf.keras.layers.AveragePooling2D(
                         pool_size = layer.pool_size,
                         strides = layer.strides,
                         padding = layer.padding,

@@ -47,10 +47,11 @@ class NST:
         if not (isinstance(content_image, np.ndarray) and
             len(np.shape(content_image)) == 3 and
             np.shape(content_image)[2] == 3):
-            raise TypeError('content_image must be a numpy.ndarray with shape (h, w, 3)')
+            raise TypeError('
+                    content_image must be a numpy.ndarray with shape (h, w, 3)')
 
         # Ensure alpha and beta are non-negative numbers
-        if alpha < 0:
+        if not (isinstance(alpha, int) and alpha >= 0 ):
             raise TypeError('alpha must be a non-negative number')
 
         if beta < 0:

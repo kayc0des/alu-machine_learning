@@ -163,7 +163,7 @@ class NST:
         # Run checks
         if not (isinstance(input_layer, tf.Tensor) or
                 isinstance(input_layer, tf.Variable) or
-                    input_layer.ndim != 4):
+                    len(input_layer.shape) != 4):
             raise TypeError('input_layer must be a tensor of rank 4')
 
         channels = int(input_layer.shape[-1])

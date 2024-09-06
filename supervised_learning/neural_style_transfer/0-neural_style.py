@@ -22,8 +22,11 @@ class NST:
     content_layer = 'block5_conv2'
 
     # Class constructor
-    def __init__(self, style_image,
-                 content_image, alpha=1e4, beta=1):
+    def __init__(self,
+                 style_image,
+                 content_image,
+                 alpha=1e4,
+                 beta=1):
         '''
         Creates an instance of the NST class
 
@@ -84,7 +87,7 @@ class NST:
             raise TypeError('image must be a numpy.ndarray with shape (h, w, 3)')
 
         h, w, _ = image.shape
-        
+
         if h > w:
             h_new = 512
             w_new = int(w * (512 / h))
@@ -96,5 +99,5 @@ class NST:
                                           size=(h_new, w_new))
         rescaled = resized / 255
         rescaled = tf.clip_by_value(rescaled, 0, 1)
-        
-        return (rescaled)
+
+        return rescaled

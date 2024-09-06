@@ -57,12 +57,14 @@ class NST:
                 'content_image must be a numpy.ndarray with shape (h, w, 3)')
 
         # Ensure alpha and beta are non-negative numbers
-        if (type(alpha) is not float and type(
-            alpha) is not int) or alpha < 0:
+        if (
+            type(alpha) is not float and type(
+                alpha) is not int) or alpha < 0:
             raise TypeError('alpha must be a non-negative number')
 
-        if (type(beta) is not float and type(
-            beta) is not int) or beta < 0:
+        if (
+            type(beta) is not float and type(
+                beta) is not int) or beta < 0:
             raise TypeError('beta must be a non-negative number')
 
         # disable lazy execution tf v1.12
@@ -87,9 +89,10 @@ class NST:
         Returns:
             the scaled image
         '''
-        if not (isinstance(image, np.ndarray) and
-            len(np.shape(image)) == 3 and
-                np.shape(image)[2] == 3):
+        if not (
+            isinstance(image, np.ndarray) and len(
+                np.shape(image)) == 3 and np.shape(
+                    image)[2] == 3):
             raise TypeError(
                 'image must be a numpy.ndarray with shape (h, w, 3)')
 

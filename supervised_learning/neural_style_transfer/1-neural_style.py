@@ -123,32 +123,21 @@ class NST:
 
         vgg_model = tf.keras.applications.VGG19(
             include_top=False, weights='imagenet')
-        
-        new_model_input = vgg_model.input
-        x = new_model_input
-        
-        # Architecture - replace max with avg
-        for layer in vgg_model.layers[1:]:
-            if isinstance(layer, tf.keras.layers.MaxPooling2D):
-                x = tf.keras.layers.AveragePooling2D(
-                        pool_size = layer.pool_size,
-                        strides = layer.strides,
-                        padding = layer.padding,
-                        name = layer.name.replace('max_pooling', 'average_pooling')
-                    )
-            else:
-                x = layer(x)
 
-        modified_vgg_model = tf.keras.models.Model(inputs=vgg_model.input, outputs=x)
-        modified_vgg_model.trainable = False
+        vgg_model.save('base')
+        custom_objects = {'MaxPooling2D': tf.keras.layers.AveragePooling2D}
+
+        vgg = tf.keras.models.load_model(
+            'base', custom_objects=custom_objects)
 
         style_outputs = [
-            modified_vgg_model.get_layer(name).output for name in self.style_layers]
+            vgg.get_layer(name).output for name in self.style_layers]
         content_outputs = [
-            modified_vgg_model.get_layer(self.content_layer).output]
+            vgg.get_layer(self.content_layer).output]
         model_outputs = style_outputs + content_outputs
 
         model = tf.keras.models.Model(
-            modified_vgg_model.input, model_outputs, name="model")
+            vgg.input, model_outputs, name="model")
+        model.trainable = False
 
         self.model = model

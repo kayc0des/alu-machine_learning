@@ -75,6 +75,7 @@ class NST:
         self.content_image = self.scale_image(content_image)
         self.alpha = alpha
         self.beta = beta
+        self.model = self.load_model()
 
     @staticmethod
     def scale_image(image):
@@ -112,3 +113,10 @@ class NST:
         rescaled = tf.clip_by_value(rescaled, 0, 1)
 
         return rescaled
+
+
+    # Public Instance Method
+    def load_model(self):
+        '''
+        Creates the model used to calculate the loss
+        '''

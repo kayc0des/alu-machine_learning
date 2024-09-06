@@ -84,21 +84,17 @@ class NST:
             raise TypeError('image must be a numpy.ndarray with shape (h, w, 3)')
 
         h, w, _ = image.shape
-
-        # Calculate new dimensions
-        max_side = 512
+        
         if h > w:
-            new_h = max_side
-            new_w = int(max_side * (w / h))
+            h_new = 512
+            w_new = int(w * (512 / h))
         else:
-            new_w = max_side
-            new_h = int(max_side * (h / w))
+            w_new = 512
+            h_new = int(h * (512 / w))
 
-        # make sure values are int
-        new_h, new_w = int(new_h), int(new_w)
-
-        image_tensor = tf.convert_to_tensor(image, dtype=tf.float32)
-        image_tensor = image_tensor / 255.0
-
-        return tf.image.resize(image_tensor[tf.newaxis, ...],
-                               [new_h, new_w], method=tf.image.ResizeMethod.BICUBIC)
+        resized = tf.image.resize_bicubic(np.expand_dims(image, axis=0),
+                                          size=(h_new, w_new))
+        rescaled = resized / 255
+        rescaled = tf.clip_by_value(rescaled, 0, 1)
+        
+        return (rescaled)

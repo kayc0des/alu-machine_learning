@@ -101,4 +101,4 @@ class NST:
         image_tensor = image_tensor / 255.0
 
         return tf.image.resize(image_tensor[tf.newaxis, ...],
-                               [new_h, new_w], method='bicubic')
+                               [new_h, new_w], method=tf.image.ResizeMethod.BICUBIC)

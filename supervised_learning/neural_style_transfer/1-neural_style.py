@@ -121,12 +121,13 @@ class NST:
         Creates the model used to calculate the loss
         '''
 
+        # load vgg model
         vgg_model = tf.keras.applications.VGG19(
             include_top=False, weights='imagenet')
 
+        # MaxPooling2D - AveragePooling 2D
         vgg_model.save('base')
         custom_objects = {'MaxPooling2D': tf.keras.layers.AveragePooling2D}
-
         vgg = tf.keras.models.load_model(
             'base', custom_objects=custom_objects)
 
@@ -138,6 +139,9 @@ class NST:
 
         model = tf.keras.models.Model(
             vgg.input, model_outputs, name="model")
+
+        # Freeze weights
         model.trainable = False
 
         self.model = model
+

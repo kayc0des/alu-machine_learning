@@ -51,14 +51,10 @@ class NST:
                     'content_image must be a numpy.ndarray with shape (h, w, 3)')
 
         # Ensure alpha and beta are non-negative numbers
-        if (type(alpha) is not float or
-            type(alpha) is not int or
-            alpha < 0):
+        if (type(alpha) is not float or type(alpha) is not int) or alpha < 0:
             raise TypeError('alpha must be a non-negative number')
 
-        if (type(beta) is not float or
-                type(beta) is not int or
-                beta < 0):
+        if (type(beta) is not float or type(beta) is not int) or beta < 0:
             raise TypeError('beta must be a non-negative number')
 
         tf.enable_eager_execution()

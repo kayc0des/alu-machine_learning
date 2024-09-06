@@ -131,5 +131,5 @@ class NST:
         model = tf.keras.models.Model(vgg_model.input, model_outputs, name="model")
         model.trainable = False
 
-        return model
+        self.model = model
 

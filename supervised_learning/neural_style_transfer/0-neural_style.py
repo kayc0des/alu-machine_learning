@@ -60,6 +60,7 @@ class NST:
         if (type(beta) is not float and type(beta) is not int) or beta < 0:
             raise TypeError('beta must be a non-negative number')
 
+        # disable lazy execution tf v1.12
         tf.enable_eager_execution()
 
         # Instance attributes

@@ -45,7 +45,8 @@ class NST:
             style_image, np.ndarray) and len(
                 np.shape(style_image)) == 3 and np.shape(
                     style_image)[2] == 3):
-            raise TypeError('style_image must be a numpy.ndarray with shape (h, w, 3)')
+            raise TypeError(
+                'style_image must be a numpy.ndarray with shape (h, w, 3)')
 
         # Check content_image type and shape
         if not (isinstance(
@@ -84,11 +85,11 @@ class NST:
             image - a np.ndarray with shape (h, w, 3)
 
         Returns:
-            the scaled image    
+            the scaled image
         '''
         if not (isinstance(image, np.ndarray) and
             len(np.shape(image)) == 3 and
-            np.shape(image)[2] == 3):
+                np.shape(image)[2] == 3):
             raise TypeError(
                 'image must be a numpy.ndarray with shape (h, w, 3)')
 
@@ -101,8 +102,9 @@ class NST:
             w_new = 512
             h_new = int(h * (512 / w))
 
-        resized = tf.image.resize_bicubic(np.expand_dims(image, axis=0),
-                                          size=(h_new, w_new))
+        resized = tf.image.resize_bicubic(
+            np.expand_dims(image, axis=0), size=(h_new, w_new))
+
         rescaled = resized / 255
         rescaled = tf.clip_by_value(rescaled, 0, 1)
 

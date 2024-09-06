@@ -123,16 +123,32 @@ class NST:
 
         vgg_model = tf.keras.applications.VGG19(
             include_top=False, weights='imagenet')
-        # vgg_model.trainable = False
+        
+        # Architecture - replace max with avg
+        modified_layers = []
+        for layer in vgg_model.layers:
+            if isinstance(layer, tf.keras.layers.MaxPooling2D):
+                modified_layers.append(
+                    tf.keras.layers.AveragePoooling2D(
+                        pool_size = layer.pool_size,
+                        strides = layer.strides,
+                        padding = layer.padding,
+                        name = layer.name.replace('max_pooling', 'average_pooling')
+                    )
+                )
+            else:
+                modified_layers.append(layer)
+
+        modified_vgg_model = tf.keras.models.Sequential(modified_layers)
+        modified_vgg_model.trainable = False
 
         style_outputs = [
-            vgg_model.get_layer(name).output for name in self.style_layers]
+            modified_vgg_model.get_layer(name).output for name in self.style_layers]
         content_outputs = [
-            vgg_model.get_layer(self.content_layer).output]
+            modified_vgg_model.get_layer(self.content_layer).output]
         model_outputs = style_outputs + content_outputs
 
         model = tf.keras.models.Model(
-            vgg_model.input, model_outputs, name="model")
-        model.trainable = False
+            modified_vgg_model.input, model_outputs, name="model")
 
         self.model = model

@@ -41,23 +41,27 @@ class NST:
         '''
 
         # Check style_image type and shape
-        if not (isinstance(style_image, np.ndarray) and
-            len(np.shape(style_image)) == 3 and
-            np.shape(style_image)[2] == 3):
+        if not (isinstance(
+            style_image, np.ndarray) and len(
+                np.shape(style_image)) == 3 and np.shape(
+                    style_image)[2] == 3):
             raise TypeError('style_image must be a numpy.ndarray with shape (h, w, 3)')
 
         # Check content_image type and shape
-        if not (isinstance(content_image, np.ndarray) and
-            len(np.shape(content_image)) == 3 and
-            np.shape(content_image)[2] == 3):
+        if not (isinstance(
+            content_image, np.ndarray) and len(
+                np.shape(content_image)) == 3 and np.shape(
+                    content_image)[2] == 3):
             raise TypeError(
-                    'content_image must be a numpy.ndarray with shape (h, w, 3)')
+                'content_image must be a numpy.ndarray with shape (h, w, 3)')
 
         # Ensure alpha and beta are non-negative numbers
-        if (type(alpha) is not float and type(alpha) is not int) or alpha < 0:
+        if (type(alpha) is not float and type(
+            alpha) is not int) or alpha < 0:
             raise TypeError('alpha must be a non-negative number')
 
-        if (type(beta) is not float and type(beta) is not int) or beta < 0:
+        if (type(beta) is not float and type(
+            beta) is not int) or beta < 0:
             raise TypeError('beta must be a non-negative number')
 
         # disable lazy execution tf v1.12
@@ -85,7 +89,8 @@ class NST:
         if not (isinstance(image, np.ndarray) and
             len(np.shape(image)) == 3 and
             np.shape(image)[2] == 3):
-            raise TypeError('image must be a numpy.ndarray with shape (h, w, 3)')
+            raise TypeError(
+                'image must be a numpy.ndarray with shape (h, w, 3)')
 
         h, w, _ = image.shape
 

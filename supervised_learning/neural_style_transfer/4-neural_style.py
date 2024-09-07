@@ -214,14 +214,14 @@ class NST:
         if not (isinstance(style_output, tf.Tensor) or
                 isinstance(style_output, tf.Variable)) or len(
                     style_output.shape) != 4:
-            raise TypeError('style_output must be tensor of rank 4')
+            raise TypeError('style_output must a be tensor of rank 4')
 
         _, _, _, c = style_output.shape
 
         if not (isinstance(gram_target, tf.Tensor) or
                 isinstance(gram_target,
                            tf.Variable)) or gram_target.shape != (1, c, c):
-            raise TypeError('gram_target must be a tensor of shape \
-                            [1, {}, {}]'.format(c, c))
+            raise TypeError(
+                'gram_target must be a tensor of shape [1, {}, {}]'.format(c, c))
 
         return tf.reduce_mean(tf.square(style_output - gram_target))

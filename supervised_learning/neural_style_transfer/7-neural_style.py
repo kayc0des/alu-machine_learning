@@ -280,3 +280,37 @@ class NST:
         return tf.reduce_mean(
             tf.square(content_output - self.content_feature)
         )
+
+    # Calculate the total cost
+    def total_cost(self, generated_image):
+        '''
+        Calculates the total cost for the generated image
+
+        Args:
+            generated_image: a tf.Tensor of shape (1, nh, nw, 3)
+
+        Returns:
+            J, J_content, J_style
+        '''
+        s = self.content_image.shape
+
+        if not (isinstance(generated_image, tf.Tensor) or
+                isinstance(generated_image,
+                           tf.Variable)) or generated_image.shape != s:
+            raise TypeError(
+                'generated_image must be a tensor of shape {}'.format(s)
+            )
+        
+        vgg19 = tf.keras.applications.vgg19
+        preprocessed_gen_image = vgg19.preprocess_input(generated_image * 255)
+        outputs = self.model(preprocessed_gen_image)
+
+        content_output = outputs[-1]
+        style_outputs = outputs[:-1]
+
+        J_content = self.content_cost(content_output)
+        J_style = self.style_cost(style_outputs)
+
+        J = self.alpha * J_content + self.beta * J_style
+
+        return J, J_content, J_style

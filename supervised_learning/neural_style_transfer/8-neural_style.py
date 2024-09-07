@@ -316,7 +316,7 @@ class NST:
 
         return J, J_content, J_style
 
-    def compute_grads(self, generated_image, alpha=10, beta=40):
+    def compute_grads(self, generated_image):
         '''
         Calculates the gradients for the generated image in TensorFlow 1.1x
 
@@ -339,7 +339,7 @@ class NST:
                 'generated_image must be a tensor of shape {}'.format(s)
             )
 
-        J_total, J_content, J_style = self.total_cost(generated_image, alpha, beta)
+        J_total, J_content, J_style = self.total_cost(generated_image)
 
         # Compute gradients
         gradients = tf.gradients(J_total, generated_image)

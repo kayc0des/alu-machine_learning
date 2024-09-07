@@ -225,4 +225,7 @@ class NST:
                 'gram_target must be a tensor of shape [1, {}, {}]'
                 .format(c, c))
 
-        return tf.reduce_mean(tf.square(style_output - gram_target))
+        gram_style_output = self.gram_matrix(style_output)
+
+        return tf.reduce_mean(
+            tf.square(gram_style_output - gram_target))

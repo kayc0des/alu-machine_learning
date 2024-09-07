@@ -178,8 +178,19 @@ class NST:
         '''
         Extract features used to calculate neural style cost
         '''
-        self.gram_style_features = [
-            self.gram_matrix(
-                self.model.get_layer(name).output) for name in self.style_layers
-        ]
-        self.content_feature = self.model.get_layer(self.content_layer).output
+        vgg_model = tf.keras.applications.vgg19
+
+        preprocess_style = vgg_model.preprocess_input(
+            self.style_image * 255)
+        preprocess_content = vgg_model.preprocess_input(
+            self.content_image * 255)
+
+        style_features = self.model(preprocess_style)[:-1]
+        content_feature = self.model(preprocess_content)[-1]
+
+        gram_style_features = []
+        for feature in style_features:
+            gram_style_features.append(self.gram_matrix(feature))
+
+        self.gram_style_features = gram_style_features
+        self.content_feature = content_feature

@@ -274,10 +274,9 @@ class NST:
         if not (isinstance(content_output, tf.Tensor) or
                 isinstance(content_output,
                            tf.Variable)) or content_output.shape != s:
-            raise TypeError('content_output must be a tensor of shape {}'.format(
-                s
-            ))
+            raise TypeError(
+                'content_output must be a tensor of shape {}'.format(s))
+
         return tf.reduce_mean(
             tf.square(content_output - self.content_feature)
         )
-        

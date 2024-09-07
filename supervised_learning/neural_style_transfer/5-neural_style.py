@@ -240,17 +240,17 @@ class NST:
         Return:
             The style cost
         '''
-        l = len(self.style_layers)
+        length = len(self.style_layers)
         
         if not isinstance(style_outputs, list) or len(
-            style_outputs) != l:
+            style_outputs) != length:
             raise TypeError(
-                'style_outputs must be a list with a length of {l}'.format(l))
+                'style_outputs must be a list with a length of {l}'.format(length))
 
         style_cost = 0.0
-        weight_per_style = 1.0 / l
+        weight_per_style = 1 / length
         
-        for i in range(l):
+        for i in range(length):
             style_cost += weight_per_style * self.layer_style_cost(
                 style_outputs[i], self.gram_style_features[i]
             )

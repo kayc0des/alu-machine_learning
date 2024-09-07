@@ -242,11 +242,11 @@ class NST:
         '''
         length = len(self.style_layers)
 
-        if not (isinstance(style_outputs, list)) or len(
+        if not isinstance(style_outputs, list) or len(
                 style_outputs) != length:
             raise TypeError(
-                'style_outputs must be a list with a length of {}'
-                .format(length))
+                'style_outputs must be a list with a length of {}'.format(
+                    length))
 
         style_cost = 0.0
         weight_per_style = 1 / length

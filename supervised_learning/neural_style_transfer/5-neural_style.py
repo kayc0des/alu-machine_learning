@@ -245,7 +245,7 @@ class NST:
         if not (isinstance(style_outputs, list)) or len(
                 style_outputs) != length:
             raise TypeError(
-                'style_outputs must be a list with a length of {l}'
+                'style_outputs must be a list with a length of {}'
                 .format(length))
 
         style_cost = 0.0

@@ -321,12 +321,13 @@ class NST:
         Calculates the gradients for the generated image in TensorFlow 1.1x
 
         Args:
-            generated_image: a tf.Tensor of shape (1, nh, nw, 3) containing the generated image
+            generated_image: a tf.Tensor of shape (1, nh, nw, 3)
             alpha: weight for the content cost
             beta: weight for the style cost
 
         Returns:
-            gradients: tf.Tensor containing the gradients for the generated image
+            gradients: tf.Tensor containing the
+            gradients for the generated image
             J_total: total cost for the generated image
             J_content: content cost for the generated image
             J_style: style cost for the generated image
@@ -334,7 +335,8 @@ class NST:
         s = self.content_image.shape
         if not (isinstance(generated_image,
                            tf.Tensor) or isinstance(
-                               generated_image, tf.Variable)) or generated_image.shape != s:
+                               generated_image,
+                               tf.Variable)) or generated_image.shape != s:
             raise TypeError(
                 'generated_image must be a tensor of shape {}'.format(s)
             )

@@ -342,9 +342,10 @@ class NST:
             )
 
         # Compute gradients
-        with tf.GradientTape() as tape:
-            J_total, J_content, J_style = self.total_cost(generated_image)
-        
-        gradients = tape.gradient(J_total, generated_image)
+        # with tf.GradientTape() as tape:
+        #     J_total, J_content, J_style = self.total_cost(generated_image)
+        # gradients = tape.gradient(J_total, generated_image)
+        J_total, J_content, J_style = self.total_cost(generated_image)
+        gradients = tf.gradients(J_total, generated_image)
 
         return (gradients, J_total, J_content, J_style)

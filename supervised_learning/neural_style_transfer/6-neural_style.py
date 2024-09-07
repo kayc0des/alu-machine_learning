@@ -277,6 +277,9 @@ class NST:
             raise TypeError(
                 'content_output must be a tensor of shape {}'.format(s))
 
+        content_output = tf.cast(content_output, dtype=tf.float32)
+        content_feature = tf.cast(self.content_feature, dtype=tf.float32)
+
         return tf.reduce_mean(
-            tf.square(content_output - self.content_feature)
+            tf.square(content_output - content_feature)
         )

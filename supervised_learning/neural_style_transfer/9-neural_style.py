@@ -348,7 +348,12 @@ class NST:
 
         return gradients, J_total, J_content, J_style
 
-    def generate_image(self, iterations=1000, step=None, lr=0.01, beta1=0.9, beta2=0.99):
+    def generate_image(self,
+                       iterations=1000,
+                       step=None,
+                       lr=0.01,
+                       beta1=0.9, 
+                       beta2=0.99):
         '''
         Generates the neural style transferred image
 
@@ -393,7 +398,8 @@ class NST:
 
         # Initialize generated image as the content image
         generated_image = tf.Variable(self.content_image, dtype=tf.float32)
-        optimizer = tf.keras.optimizers.Adam(learning_rate=lr, beta_1=beta1, beta_2=beta2)
+        optimizer = tf.keras.optimizers.Adam(
+            learning_rate=lr, beta_1=beta1, beta_2=beta2)
         best_cost = float('inf')
         best_image = None
 

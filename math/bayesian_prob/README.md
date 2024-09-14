@@ -10,3 +10,6 @@ Bayes' Theorem, named after 18th-century British mathematician Thomas Bayes, is 
 - What is a prior?
 - What is a posterior?
 - What is a likelihood?
+
+-----
+Maths for ML

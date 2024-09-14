@@ -21,11 +21,12 @@ class RNNCell():
             h_next - the next hidden state
             y - the output of the cell
         '''
+
         self.Wh = np.random.normal(size=(h + i, h))
         self.Wy = np.random.normal(size=(h, o))
         self.bh = np.zeros((1, h))
         self.by = np.zeros((1, o))
-        
+
     def softmax(self, x):
         """
         Performs the softmax function
@@ -45,7 +46,7 @@ class RNNCell():
     def forward(self, h_prev, x_t):
         '''
         Function that performs forward propagation
-        
+
         Args:
             h_prev - previous hidden state
             x_t - input data at time step t

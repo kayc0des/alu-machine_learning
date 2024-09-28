@@ -49,9 +49,10 @@ def bag_of_words(sentences, vocab=None):
         words = sentence.split()
         for j in range(f):
             for word in words:
-                freq = words.count(word)
-                index = vocab.index(word)
-                embeddings[i][index] = freq
+                if word in vocab:
+                    freq = words.count(word)
+                    index = vocab.index(word)
+                    embeddings[i][index] = freq
 
     return embeddings, vocab
 

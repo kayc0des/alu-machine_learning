@@ -20,17 +20,52 @@ def bag_of_words(sentences, vocab=None):
         - features: list of features used for embeddings
     '''
 
+    # Text preprocessing -> lower sentences
+    lowered = []
+    for sentence in sentences:
+        lowered.append(sentence.lower())
 
-if __name__ == '__main__':
-    sentences = ["Holberton school is Awesome!",
-             "Machine learning is awesome",
-             "NLP is the future!",
-             "The children are our future",
-             "Our children's children are our grandchildren",
-             "The cake was not very good",
-             "No one said that the cake was not very good",
-             "Life is beautiful"]
+    # Remove exclamation marks and 's
+    lowered = [sentence.replace('!', '') for sentence in lowered]
+    lowered = [sentence.replace("'s", '') for sentence in lowered]
 
-    E, F = bag_of_words(sentences=sentences)
-    print(E)
-    print(F)
+    # Create dictionary
+    if vocab is None:
+        unique_words = set()
+        for sentence in lowered:
+            for word in sentence.split():
+                unique_words.add(word)
+
+    vocab = list(unique_words)
+    vocab.sort(reverse=False)
+    f = len(vocab)
+    s = len(lowered)
+
+    # initialize BOW embeddings
+    embeddings = np.zeros(shape=(s, f))
+    
+    for i in range(s):
+        sentence = lowered[i]
+        words = sentence.split()
+        for j in range(f):
+            for word in words:
+                freq = words.count(word)
+                index = vocab.index(word)
+                embeddings[i][index] = freq
+
+    return embeddings, vocab
+
+# if __name__ == '__main__':
+#     sentences = ["Holberton school is Awesome!",
+#              "Machine learning is awesome",
+#              "NLP is the future!",
+#              "The children are our future",
+#              "Our children's children are our grandchildren",
+#              "The cake was not very good",
+#              "No one said that the cake was not very good",
+#              "Life is beautiful"]
+
+#     E, F = bag_of_words(sentences)
+#     print(E)
+#     print(F)
+#     print(E.shape)

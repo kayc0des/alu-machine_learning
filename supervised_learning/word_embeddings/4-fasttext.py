@@ -1,3 +1,6 @@
+#!/usr/bin/env python3
+""" Trains gensim fasttext model """
+
 from gensim.models import FastText
 from gensim.utils import simple_preprocess
 

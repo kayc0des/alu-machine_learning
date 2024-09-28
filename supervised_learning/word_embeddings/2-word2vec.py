@@ -16,7 +16,7 @@ def word2vec_model(sentences,
                    workers=1):
     """
     Creates and trains a gensim vord2vec
-    
+
     Args:
         - sentences: list of sentences to be trained on
         - size: dimensionality of the embedding layer
@@ -27,7 +27,7 @@ def word2vec_model(sentences,
         - iterations: number of iterations to train over
         - seed: seed for the random number generator
         - workers: number of worker threads to train the model
-    
+
     Returns:
         Trained model
     """

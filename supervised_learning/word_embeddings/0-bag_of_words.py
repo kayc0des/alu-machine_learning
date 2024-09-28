@@ -35,15 +35,15 @@ def bag_of_words(sentences, vocab=None):
         for sentence in lowered:
             for word in sentence.split():
                 unique_words.add(word)
+        vocab = list(unique_words)
+        vocab.sort(reverse=False)
 
-    vocab = list(unique_words)
-    vocab.sort(reverse=False)
     f = len(vocab)
     s = len(lowered)
 
     # initialize BOW embeddings
-    embeddings = np.zeros(shape=(s, f))
-    
+    embeddings = np.zeros(shape=(s, f), dtype=np.int32)
+
     for i in range(s):
         sentence = lowered[i]
         words = sentence.split()

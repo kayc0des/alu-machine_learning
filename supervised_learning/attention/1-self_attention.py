@@ -27,7 +27,7 @@ class SelfAttention(tf.keras.layers.Layer):
         self.W = tf.keras.layers.Dense(units=units)
         self.U = tf.keras.layers.Dense(units=units)
         self.V = tf.keras.layers.Dense(units=1)
-        
+
     def call(self, s_prev, hidden_states):
         '''
         Call method
@@ -43,7 +43,7 @@ class SelfAttention(tf.keras.layers.Layer):
             weights - a tensor of shape (batch, input_seq_len, 1)
                 containing the attention weights
         '''
-        
+
         s_prev = tf.expand_dims(s_prev, 1)
 
         # Apply dense layers to prev decoder state & encoder hidden states
@@ -52,14 +52,15 @@ class SelfAttention(tf.keras.layers.Layer):
 
         # Calculate score by applying tanh to the sum of W_s and U_h
         score = tf.nn.tanh(W_s + U_h)
-        
+
         # Apply V to the tanh result to get attention scores
         attention_weights = self.V(score)
 
         # Remove the last dim & apply softmax to get attention distribution
         attention_weights = tf.nn.softmax(attention_weights, axis=1)
 
-        # Compute the context vec as the weighted sum of the encoder hidden states
+        # Compute the context vec as the 
+        # weighted sum of the encoder hidden states
         context_vector = attention_weights * hidden_states
         context_vector = tf.reduce_sum(context_vector, axis=1)
 

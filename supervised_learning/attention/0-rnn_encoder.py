@@ -29,13 +29,13 @@ class RNNEncoder(tf.keras.layers.Layer):
         self.embedding = tf.keras.layers.Embedding(input_dim=vocab,
                                                    output_dim=embedding)
         self.gru = tf.keras.layers.GRU(units=units,
-                       recurrent_initializer = 'glorot_uniform',
-                       return_sequences=True,
-                       return_state=True)
+                                       recurrent_initializer='glorot_uniform',
+                                       return_sequences=True,
+                                       return_state=True)
 
     def initialize_hidden_state(self):
         '''
-        Initializes the hidded states of the
+        Initializes the hidden states of the
         RNN Cell to tensor of zeros
 
         Args:

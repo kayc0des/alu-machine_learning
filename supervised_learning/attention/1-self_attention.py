@@ -59,7 +59,7 @@ class SelfAttention(tf.keras.layers.Layer):
         # Remove the last dim & apply softmax to get attention distribution
         attention_weights = tf.nn.softmax(attention_weights, axis=1)
 
-        # Compute the context vec as the 
+        # Compute the context vec as the
         # weighted sum of the encoder hidden states
         context_vector = attention_weights * hidden_states
         context_vector = tf.reduce_sum(context_vector, axis=1)

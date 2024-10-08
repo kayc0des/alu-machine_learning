@@ -3,10 +3,9 @@
 
 
 import tensorflow as tf
-from tensorflow.keras.layers import Layer, Embedding, GRU
 
 
-class RNNEncoder(Layer):
+class RNNEncoder(tf.keras.layers.Layer):
     '''
     Inherits from tf.keras.Layers to encode for machine learning
     '''
@@ -27,8 +26,9 @@ class RNNEncoder(Layer):
         super(RNNEncoder, self).__init__()
         self.batch = batch
         self.units = units
-        self.embedding = Embedding(input_dim = vocab, output_dim = embedding)
-        self.gru = GRU(units = units,
+        self.embedding = tf.keras.layers.Embedding(input_dim = vocab,
+                                                   output_dim = embedding)
+        self.gru = tf.keras.layers.GRU(units = units,
                        recurrent_initializer = 'glorot_uniform',
                        return_sequences = True,
                        return_state = True)

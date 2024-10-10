@@ -15,7 +15,7 @@ def positional_encoding(max_seq_len, dm):
 
     Returns:
         positional_encoding: numpy.ndarray of shape (max_seq_len, dm)
-        containing the positional encoding vectors  
+        containing the positional encoding vectors
     '''
     positional_encoding = np.zeros((max_seq_len, dm))
     for i in range(max_seq_len):

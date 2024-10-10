@@ -23,6 +23,7 @@ class RNNDecoder(tf.keras.layers.Layer):
         self.embedding = tf.keras.layers.Embedding(vocab, embedding)
         self.units = units
         self.batch = batch
+        self.attention = SelfAttention(self.units)
         self.gru = tf.keras.layers.GRU(self.units,
                                        return_sequences=True,
                                        return_state=True,
@@ -55,8 +56,7 @@ class RNNDecoder(tf.keras.layers.Layer):
 
         # Concatenate the input and the
         # previous decoder hidden state
-        attention = SelfAttention(self.units)
-        context, attention_weights = attention.call(s_prev, hidden_states)
+        context, attention_weights = self.attention.call(s_prev, hidden_states)
         x = tf.concat([x, context], axis=-1)
 
         # Pass the concatenated input through the GRU

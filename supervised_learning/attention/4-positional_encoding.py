@@ -3,7 +3,6 @@
 
 
 import numpy as np
-import tensorflow as tf
 
 
 def positional_encoding(max_seq_len, dm):
@@ -27,7 +26,3 @@ def positional_encoding(max_seq_len, dm):
                 positional_encoding[i, j] = np.cos(i / 10000 ** ((j - 1) / dm))
 
     return positional_encoding
-
-PE = positional_encoding(30, 512)
-print(PE.shape)
-print(PE)

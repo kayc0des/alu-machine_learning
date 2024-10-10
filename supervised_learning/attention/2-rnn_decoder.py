@@ -24,11 +24,11 @@ class RNNDecoder(tf.keras.layers.Layer):
         self.units = units
         self.batch = batch
         self.gru = tf.keras.layers.GRU(self.units,
-                                        return_sequences=True,
-                                        return_state=True,
-                                        recurrent_initializer='glorot_uniform')
+                                       return_sequences=True,
+                                       return_state=True,
+                                       recurrent_initializer='glorot_uniform')
         self.F = tf.keras.layers.Dense(vocab)
-                                        
+                                  
     def call(self, x, s_prev, hidden_states):
         '''
         Method to call the layer
@@ -44,7 +44,8 @@ class RNNDecoder(tf.keras.layers.Layer):
         Returns:
             outputs - tensor of shape (batch, vocab) containing the outputs
                 of the decoder
-            s - tensor of shape (batch, units) containing the new decoder hidden state
+            s - tensor of shape (batch, units) 
+                containing the new decoder hidden state
         '''
         # Embed the input
         x = self.embedding(x)

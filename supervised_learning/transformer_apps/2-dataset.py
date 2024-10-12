@@ -43,3 +43,28 @@ class Dataset:
             (en.numpy() for pt, en in data), target_vocab_size=(2**15)
         )
         return tokenizer_pt, tokenizer_en
+
+    def encode(self, pt, en):
+        '''
+        Encodes a translation pair
+        '''
+        pt_start_index = self.tokenizer_pt.vocab_size
+        pt_end_index = pt_start_index + 1
+        en_start_index = self.tokenizer_en.vocab_size
+        en_end_index = en_start_index + 1
+        pt_tokens = [pt_start_index] + self.tokenizer_pt.encode(
+            pt.numpy()) + [pt_end_index]
+        en_tokens = [en_start_index] + self.tokenizer_en.encode(
+            en.numpy()) + [en_end_index]
+        return pt_tokens, en_tokens
+
+    def tf_encode(self, pt, en):
+        '''
+        Encodes a translation pair
+        '''
+        pt_encoded, en_encoded = tf.py_function(func=self.encode,
+                                                inp=[pt, en],
+                                                Tout=[tf.int64, tf.int64])
+        pt_encoded.set_shape([None])
+        en_encoded.set_shape([None])
+        return pt_encoded, en_encoded

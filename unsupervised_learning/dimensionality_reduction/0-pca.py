@@ -30,5 +30,7 @@ def pca(X, var=0.95):
     cumulative_variance = np.cumsum(explained_variance)
 
     nd = np.searchsorted(cumulative_variance, var) + 1
+    
+    W = sorted_eigenvectors[:, :nd]
 
-    return sorted_eigenvectors[:, :nd]
+    return W

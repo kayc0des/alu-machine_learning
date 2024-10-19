@@ -53,8 +53,8 @@ def expectation(X, pi, m, S):
         if np.any(total_likelihood == 0):
             return None, None
 
-        l = np.sum(np.log(total_likelihood))
+        likelihood = np.sum(np.log(total_likelihood))
         g /= total_likelihood
-        return g, l
+        return g, likelihood
     except Exception as e:
         return None, None

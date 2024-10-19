@@ -1,4 +1,4 @@
-#! /usr/bin/env python3
+#!/usr/bin/env python3
 '''
 Expectation step in the EM algorithm for a GMM
 '''

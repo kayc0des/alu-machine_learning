@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 
 
-import numpy as np
-from sklearn.mixture import GaussianMixture
+import sklearn.mixture
 
 
 def gmm(X, k):
@@ -28,7 +27,7 @@ def gmm(X, k):
         The Bayesian Information Criterion (BIC) for the model.
     """
     # Fit the Gaussian Mixture Model to the data
-    gmm_model = GaussianMixture(n_components=k)
+    gmm_model = sklearn.mixture.GaussianMixture(n_components=k)
     gmm_model.fit(X)
 
     # Extract the required parameters
@@ -39,4 +38,3 @@ def gmm(X, k):
     bic = gmm_model.bic(X)
 
     return pi, m, S, clss, bic
-

@@ -1,31 +1,30 @@
 #!/usr/bin/env python3
-''' Script performs PCA on a dataset '''
+"""Write a function that performs PCA on a dataset"""
 
 
 import numpy as np
 
 
 def pca(X, ndim):
-    '''
-    Performs PCA on a dataset
+    """
+    PCA on a dataset
 
-    Args:
-        X -> np array of shape (n, d)
-        ndim -> new dimensionality of X
+    parameters:
+        X [numpy.ndarray of shape (n, d)]: dataset
+            n: number of data points
+            d: number of dimensions in each data point
+        ndim [int]: the new dimensionality of the transformed X
 
-    Returns:
-        T -> np array of shape (d, ndim)
-        containing transformed version of X
-    '''
-    cov_matrix = np.cov(X, rowvar=False)
-
-    eigenvalues, eigenvectors = np.linalg.eigh(cov_matrix)
-
-    sorted_idx = np.argsort(eigenvalues)[::-1]
-    sorted_eigenvectors = eigenvectors[:, sorted_idx]
-
-    W = sorted_eigenvectors[:, :ndim]
-
-    T = np.dot(X, W)
-
-    return T
+    returns:
+        T [numpy.ndarray of shape (n, ndim)]:
+            containing the transformed version of X
+            n: number of data points
+            ndim: the new dimensionality of the transformed X
+    """
+    # n, d = X.shape
+    mean = np.mean(X, axis=0, keepdims=True)
+    A = X - mean
+    u, s, v = np.linalg.svd(A)
+    W = v.T[:, :ndim]
+    T = np.matmul(A, W)
+    return (T)

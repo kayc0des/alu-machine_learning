@@ -1,54 +1,40 @@
 #!/usr/bin/env python3
 
+"""
+This module contains a function that calculates
+probability density function of a Gaussian distribution
+"""
 
 import numpy as np
 
 
 def pdf(X, m, S):
     """
-    Calculate the probability density function (PDF) of a Gaussian distribution.
+    initializes variables for a Gaussian Mixture Model
 
-    Parameters:
-    X : numpy.ndarray of shape (n, d)
-        The data points whose PDF should be evaluated.
-    m : numpy.ndarray of shape (d,)
-        The mean of the distribution.
-    S : numpy.ndarray of shape (d, d)
-        The covariance matrix of the distribution.
+    X: numpy.ndarray (n, d) containing the dataset
+        - n no. of data points
+        - d no. of dimensions for each data point
+    m: numpy.ndarray (d,) mean of the distribution
+    S: numpy.ndarray (d, d) covariance matrix of the distribution
 
-    Returns:
-    P : numpy.ndarray of shape (n,)
-        The PDF values for each data point, or None on failure.
+    return:
+        - P: numpy.ndarray (n,) the PDF values for each data point
     """
-    if not isinstance(X, np.ndarray) or not isinstance(m, np.ndarray) or not isinstance(S, np.ndarray):
+    if not isinstance(X, np.ndarray) or len(X.shape) != 2:
         return None
-    if len(X.shape) != 2 or len(m.shape) != 1 or len(S.shape) != 2:
+    if not isinstance(m, np.ndarray) or len(m.shape) != 1:
         return None
-    if X.shape[1] != m.shape[0] or S.shape[0] != S.shape[1] or S.shape[0] != m.shape[0]:
+    if not isinstance(S, np.ndarray) or len(S.shape) != 2:
         return None
-
-    # Get dimensions
     n, d = X.shape
-
-    # Compute the determinant and inverse of the covariance matrix
-    det_S = np.linalg.det(S)
-    if det_S == 0:
+    if d != m.shape[0] or d != S.shape[0] or d != S.shape[1]:
         return None
-    inv_S = np.linalg.inv(S)
-
-    # Compute the constant factor in the PDF equation
-    denom = np.sqrt((2 * np.pi) ** d * det_S)
-
-    # Center the data by subtracting the mean
-    X_centered = X - m
-
-    # Compute the exponent (this uses matrix multiplication)
-    exponent = np.sum(X_centered @ inv_S * X_centered, axis=1)
-
-    # Compute the PDF values
-    P = (1. / denom) * np.exp(-0.5 * exponent)
-
-    # Ensure minimum value of 1e-300 for numerical stability
-    P = np.maximum(P, 1e-300)
-
-    return P
+    S_det = np.linalg.det(S)
+    S_inv = np.linalg.inv(S)
+    fac = 1 / np.sqrt(((2 * np.pi) ** d) * S_det)
+    X_m = X - m
+    X_m_dot = np.dot(X_m, S_inv)
+    X_m_dot_X_m = np.sum(X_m_dot * X_m, axis=1)
+    P = fac * np.exp(-0.5 * X_m_dot_X_m)
+    return np.maximum(P, 1e-300)

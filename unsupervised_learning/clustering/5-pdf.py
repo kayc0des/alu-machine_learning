@@ -27,26 +27,28 @@ def pdf(X, m, S):
     if X.shape[1] != m.shape[0] or S.shape[0] != S.shape[1] or S.shape[0] != m.shape[0]:
         return None
 
-    try:
-        n, d = X.shape
+    # Get dimensions
+    n, d = X.shape
 
-        # Compute the determinant and inverse of the covariance matrix
-        det_S = np.linalg.det(S)
-        inv_S = np.linalg.inv(S)
-
-        # Calculate the constant coefficient in the Gaussian PDF formula
-        denom = np.sqrt(((2 * np.pi) ** d) * det_S)
-
-        # Compute the exponent part
-        X_m = X - m
-        exponent = -0.5 * np.einsum('ij,ij->i', X_m @ inv_S, X_m)
-
-        # Calculate the PDF for each data point
-        P = (1. / denom) * np.exp(exponent)
-
-        # Ensure a minimum value of 1e-300 for all elements in P
-        P = np.maximum(P, 1e-300)
-
-        return P
-    except Exception as e:
+    # Compute the determinant and inverse of the covariance matrix
+    det_S = np.linalg.det(S)
+    if det_S == 0:
         return None
+    inv_S = np.linalg.inv(S)
+
+    # Compute the constant factor in the PDF equation
+    denom = np.sqrt((2 * np.pi) ** d * det_S)
+
+    # Center the data by subtracting the mean
+    X_centered = X - m
+
+    # Compute the exponent (this uses matrix multiplication)
+    exponent = np.sum(X_centered @ inv_S * X_centered, axis=1)
+
+    # Compute the PDF values
+    P = (1. / denom) * np.exp(-0.5 * exponent)
+
+    # Ensure minimum value of 1e-300 for numerical stability
+    P = np.maximum(P, 1e-300)
+
+    return P

@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+'''
+Calculates the Gaussian Matrix
+'''
 
 
 import sklearn.mixture

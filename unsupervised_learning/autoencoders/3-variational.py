@@ -1,93 +1,65 @@
 #!/usr/bin/env python3
-"""
-Defines function that creates a variational autoencoder
-"""
+'''variational autoencoder'''
 
 
-from tensorflow import keras
+import tensorflow.keras as keras
 
 
 def autoencoder(input_dims, hidden_layers, latent_dims):
-    """
-    Creates a variational autoencoder
-
-    parameters:
-        input_dims [int]:
-            contains the dimensions of the model input
-        hidden_layers [list of ints]:
-            contains the number of nodes for each hidden layer in the encoder
-                the hidden layers should be reversed for the decoder
-        latent_dims [int]:
-            contains the dimensions of the latent space representation
-
-    All layers should use relu activation except for the mean and log
-        variance layers in the encoder, which should use None,
-        and the last layer, which should use sigmoid activation
-    Autoencoder model should be compiled with Adam optimization
-        and binary cross-entropy loss
-
-    returns:
-        encoder, decoder, auto
-            encoder [model]: the encoder model,
-                which should output the latent representation, the mean,
-                and the log variance
-            decoder [model]: the decoder model
-            auto [model]: full autoencoder model
-                compiled with adam optimization and binary cross-entropy loss
-    """
-    if type(input_dims) is not int:
-        raise TypeError(
-            "input_dims must be an int containing dimensions of model input")
-    if type(hidden_layers) is not list:
-        raise TypeError("hidden_layers must be a list of ints \
-        representing number of nodes for each layer")
+    '''creates an autoencoder'''
+    # Encoder
+    encoder_input = keras.Input(shape=(input_dims,))
+    x = encoder_input
     for nodes in hidden_layers:
-        if type(nodes) is not int:
-            raise TypeError("hidden_layers must be a list of ints \
-            representing number of nodes for each layer")
-    if type(latent_dims) is not int:
-        raise TypeError("latent_dims must be an int containing dimensions of \
-        latent space representation")
+        x = keras.layers.Dense(nodes, activation='relu')(x)
 
-    # encoder
-    encoder_inputs = keras.Input(shape=(input_dims,))
-    encoder_value = encoder_inputs
-    for i in range(len(hidden_layers)):
-        encoder_layer = keras.layers.Conv2D(hidden_layers[i],
-                                            activation='relu',
-                                            kernel_size=(3, 3),
-                                            padding='same')
-        encoder_value = encoder_layer(encoder_value)
-        encoder_batch_norm = keras.layers.BatchNormalization()
-        encoder_value = encoder_batch_norm(encoder_value)
-    encoder_flatten = keras.layers.Flatten()
-    encoder_value = encoder_flatten(encoder_value)
-    encoder_dense = keras.layers.Dense(activation='relu')
-    encoder_value = encoder_dense(encoder_value)
-    encoder_batch_norm = keras.layers.BatchNormalization()
-    encoder_value = encoder_batch_norm(encoder_value)
+    # Mean and log variance for latent space
+    z_mean = keras.layers.Dense(latent_dims, activation=None)(x)
+    z_log_var = keras.layers.Dense(latent_dims, activation=None)(x)
 
-    encoder_output_layer = keras.layers.Dense(units=latent_dims,
-                                              activation='relu')
-    encoder_outputs = encoder_output_layer(encoder_value)
-    encoder = keras.Model(inputs=encoder_inputs, outputs=encoder_outputs)
+    # Sampling layer
+    def sampling(args):
+        z_mean, z_log_var = args
+        batch = keras.backend.shape(z_mean)[0]
+        dim = keras.backend.int_shape(z_mean)[1]
+        epsilon = keras.backend.random_normal(shape=(batch, dim))
+        return z_mean + keras.backend.exp(0.5 * z_log_var) * epsilon
 
-    # decoder
-    decoder_inputs = keras.Input(shape=(latent_dims,))
-    decoder_value = decoder_inputs
-    for i in range(len(hidden_layers) - 1, -1, -1):
-        decoder_layer = keras.layers.Dense(units=hidden_layers[i],
-                                           activation='relu')
-        decoder_value = decoder_layer(decoder_value)
-    decoder_output_layer = keras.layers.Dense(units=input_dims,
-                                              activation='sigmoid')
-    decoder_outputs = decoder_output_layer(decoder_value)
-    decoder = keras.Model(inputs=decoder_inputs, outputs=decoder_outputs)
+    z = keras.layers.Lambda(sampling,
+                            output_shape=(latent_dims,),
+                            name='z')([z_mean, z_log_var])
+    encoder = keras.models.Model(
+        encoder_input, [z, z_mean, z_log_var], name='encoder'
+    )
 
-    # autoencoder
-    inputs = encoder_inputs
-    auto = keras.Model(inputs=inputs, outputs=decoder(encoder(inputs)))
-    auto.compile(optimizer='adam',
-                 loss='binary_crossentropy')
+    # Decoder
+    decoder_input = keras.Input(shape=(latent_dims,))
+    x = decoder_input
+    for nodes in reversed(hidden_layers):
+        x = keras.layers.Dense(nodes, activation='relu')(x)
+    x = keras.layers.Dense(input_dims, activation='sigmoid')(x)
+    decoder = keras.models.Model(decoder_input, x, name='decoder')
 
-    return encoder, decoder, auto
+    # Full VAE Model
+    autoencoder_input = encoder_input
+    z, z_mean, z_log_var = encoder(autoencoder_input)
+    reconstructed = decoder(z)
+    autoencoder = keras.models.Model(
+        autoencoder_input, reconstructed, name='autoencoder'
+    )
+
+    # Loss function
+    def vae_loss(y_true, y_pred):
+        reconstruction_loss = keras.losses.binary_crossentropy(y_true, y_pred)
+        reconstruction_loss *= input_dims
+        a = keras.backend.square(z_mean)
+        b = keras.backend.exp(z_log_var)
+        kl_loss = -0.5 * keras.backend.sum(
+            1 + z_log_var - a - b,
+            axis=-1
+        )
+        return keras.backend.mean(reconstruction_loss + kl_loss)
+
+    autoencoder.compile(optimizer='adam', loss=vae_loss)
+
+    return encoder, decoder, autoencoder

@@ -25,3 +25,15 @@ This folder contains scripts for q-learning
     ```bash
     python3 1-q_init.py
     ```
+
+- `2-epsilon_greedy`: Uses epsilon greedy to determine if the agent should explore or exploit the environment.
+    - Function `epsilon_greedy`
+        - Args:
+            - Q: np array containing q-values
+            - state: the current state
+            - epsilon: epsilon to use for the calculation
+        - Returns:
+            - Next Action Index
+    ```bash
+    python3 2-epsilon_greedy.py
+    ```

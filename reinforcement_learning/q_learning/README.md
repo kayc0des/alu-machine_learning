@@ -15,3 +15,13 @@ This folder contains scripts for q-learning
     ```bash
     python3 0-load_env.py
     ```
+
+- `1-q_init.py`: Initializes the Q-table
+    - Function `q_init`
+        - Args:
+            - env: An instance of the frozen lake environment
+        - Returns:
+            - Initialized Q table as a numpy.ndarray of zeros
+    ```bash
+    python3 1-q_init.py
+    ```

@@ -1,6 +1,6 @@
 # Q Learning
 
-This folder contains scripts for q-learning 
+Q-learning is a model-free reinforcement learning algorithm that helps an agent learn the optimal action-selection policy by iteratively updating Q-values, which represent the expected rewards of actions in specific states (Geeks for Geeks, 2024). This folder contains scripts which are part of the Q-learning intranet project for ML techniques II (ALU).
 
 ## Scripts
 
